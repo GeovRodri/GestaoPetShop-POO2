@@ -9,11 +9,10 @@
   <dependencies>
     <dependency>
       <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
+      <artifactId>hibernate-agroal</artifactId>
       <version>5.3.1.Final</version>
     </dependency>
   </dependencies>
-  
   
 </project> 
 
