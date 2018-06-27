@@ -1,3 +1,0 @@
-#Tomcat publish data
-#Sat Jun 23 20:41:32 BRT 2018
-org.eclipse.jst.jee.server\:GestaoPetShop-POO2=E\:\\IFG\\apache-tomcat-8.0.52\\wtpwebapps\\GestaoPetShop-POO2
