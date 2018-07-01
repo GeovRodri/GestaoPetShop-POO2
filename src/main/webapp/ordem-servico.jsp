@@ -1,6 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ include file="../../header.jsp"%>
-<jsp:useBean id="bean" class="br.edu.ifg.bean.ListarClientesBean" />
+<jsp:useBean id="bean" class="br.edu.ifg.bean.OrdemServicoBean" />
 
 <div class="container-fluid">
 	<!-- <div class="card card-register mx-auto mt-5">
@@ -10,9 +10,13 @@
 				<div class="form-group">
 					<div class="form-row">
 						<div class="col-md-6">
-							<label for="exampleInputName">First name</label> <input
-								class="form-control" id="exampleInputName" type="text"
-								aria-describedby="nameHelp" placeholder="Enter first name">
+							<label for="clienteInput">Cliente</label>
+							<select class="form-control" name="clienteId" id="clienteInput">
+								<option value="">Selecione um cliente</option>
+								<c:forEach var="cliente" items="${bean.clientes}" varStatus="id">
+									<option value="${cliente.id}">${cliente.nome}</option>
+						        </c:forEach>
+							</select>
 						</div>
 						<div class="col-md-6">
 							<label for="exampleInputLastName">Last name</label> <input
