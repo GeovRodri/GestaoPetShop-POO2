@@ -1,58 +1,62 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ include file="../../header.jsp"%>
-<jsp:useBean id="bean" class="br.edu.ifg.bean.OrdemServicoBean" />
+<jsp:useBean id="bean" class="br.edu.ifg.bean.ordemservico.OrdemServicoBean" />
 
 <div class="container-fluid">
-	<!-- <div class="card card-register mx-auto mt-5">
-		<div class="card-header">Register an Account</div>
-		<div class="card-body"> -->
-			<form>
-				<div class="form-group">
-					<div class="form-row">
-						<div class="col-md-6">
-							<label for="clienteInput">Cliente</label>
-							<select class="form-control" name="clienteId" id="clienteInput">
-								<option value="">Selecione um cliente</option>
-								<c:forEach var="cliente" items="${bean.clientes}" varStatus="id">
-									<option value="${cliente.id}">${cliente.nome}</option>
-						        </c:forEach>
-							</select>
-						</div>
-						<div class="col-md-6">
-							<label for="exampleInputLastName">Last name</label> <input
-								class="form-control" id="exampleInputLastName" type="text"
-								aria-describedby="nameHelp" placeholder="Enter last name">
-						</div>
-					</div>
+	<form>
+		<div class="form-group">
+			<div class="form-row">
+				<div class="col-md-6">
+					<label for="clienteInput">Cliente</label>
+					<select class="form-control" name="clienteId" id="clienteInput">
+						<option value="">Selecione um cliente</option>
+						<c:forEach var="cliente" items="${bean.clientes}" varStatus="id">
+							<option value="${cliente.id}">${cliente.nome}</option>
+				        </c:forEach>
+					</select>
 				</div>
-				<div class="form-group">
-					<label for="exampleInputEmail1">Email address</label> <input
-						class="form-control" id="exampleInputEmail1" type="email"
-						aria-describedby="emailHelp" placeholder="Enter email">
+				<div class="col-md-6">
+					<label for="animalInput">Animal</label>
+					<select class="form-control" name="animalId" id="animalInput">
+						<option value="">Selecione um Animal</option>
+						<c:forEach var="animal" items="${bean.animais}" varStatus="id">
+							<option value="${animal.id}">${animal.nome}</option>
+				        </c:forEach>
+					</select>
 				</div>
-				<div class="form-group">
-					<div class="form-row">
-						<div class="col-md-6">
-							<label for="exampleInputPassword1">Password</label> <input
-								class="form-control" id="exampleInputPassword1" type="password"
-								placeholder="Password">
-						</div>
-						<div class="col-md-6">
-							<label for="exampleConfirmPassword">Confirm password</label> <input
-								class="form-control" id="exampleConfirmPassword" type="password"
-								placeholder="Confirm password">
-						</div>
-					</div>
-				</div>
-				<a class="btn btn-primary btn-block" href="login.html">Register</a>
-			</form>
-			<div class="text-center">
-				<a class="d-block small mt-3" href="login.html">Login Page</a> <a
-					class="d-block small" href="forgot-password.html">Forgot
-					Password?</a>
 			</div>
 		</div>
-	<!-- </div>
-</div> -->
+		<div class="form-group">
+			<div class="form-row">
+				<div class="col-md-6">
+					<label for="dataInput">Data</label> 
+					<input class="form-control" id="dataInput" name="data" type="date">
+				</div>
+			</div>
+		</div>
+		
+		<button type="button" class="btn btn-primary" onclick="salvar()">Salvar</button>
+	</form>
+</div>
+
+<script>
+  		function salvar() {
+  			$.ajax({    
+                type: 'POST',
+                url: 'ordem-servico',
+                data: {
+                	clienteId: $('#clienteInput').val(),
+                	animalId: $('#animalInput').val(),
+                	data: $('#dataInput').val()
+                },
+                success: function(){
+                  alert('Ordem de Serviço salva com sucesso!');
+                },
+                error: function(error){
+                	alert(error);
+                }
+              });
+	    }
+</script>
 
 <%@ include file="../../footer.jsp"%>
