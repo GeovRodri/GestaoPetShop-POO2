@@ -39,13 +39,13 @@ public class OrdemServicoServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		if (req.getParameter("clienteId").isEmpty() || req.getParameter("animalId").isEmpty() || req.getParameter("data").isEmpty()) {
+			throw new ValidacaoException("Preencha os campos obrigatórios!");
+		}
+		
 		Integer clienteId = Integer.valueOf(req.getParameter("clienteId"));
 		Integer animalId = Integer.valueOf(req.getParameter("animalId"));
 		Date data = Utils.stringToDate(req.getParameter("data"));
-		
-		if (clienteId == null || animalId == null || data == null) {
-			throw new ValidacaoException("Preencha os campos obrigatórios!");
-		}
 		
 		Cliente cliente = this.clienteDAO.encontrar(clienteId);
 		Animal animal = this.animalDAO.encontrar(animalId);
