@@ -1,6 +1,5 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ include file="../../header.jsp"%>
-<jsp:useBean id="bean" class="br.edu.ifg.bean.ordemservico.ListarOrdemServicoBean" />
 
 <div class="container-fluid">
 	<div class="table-responsive">
@@ -15,7 +14,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="ordemServico" items="${bean.listOrdemServico}" varStatus="id">
+				<c:forEach var="ordemServico" items="${listOrdemServico}" varStatus="id">
 					<tr>
 						<td>${ordemServico.id}</td>
 						<td>${ordemServico.cliente.nome}</td>

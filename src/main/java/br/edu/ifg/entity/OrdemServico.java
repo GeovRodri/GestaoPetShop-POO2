@@ -1,7 +1,9 @@
 package br.edu.ifg.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -54,6 +57,9 @@ public class OrdemServico extends EntidadeBase {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_alt", nullable = true, updatable = false)
     private Usuario usuarioAlt;
+    
+    @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL)
+    private List<ItemOrdemServico> itens;
 
 	public Integer getId() {
 		return id;
@@ -117,5 +123,13 @@ public class OrdemServico extends EntidadeBase {
 
 	public void setDataServico(Date dataServico) {
 		this.dataServico = dataServico;
+	}
+
+	public List<ItemOrdemServico> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<ItemOrdemServico> itens) {
+		this.itens = itens;
 	}
 }

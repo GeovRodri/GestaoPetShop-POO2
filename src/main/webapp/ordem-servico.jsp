@@ -1,6 +1,5 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ include file="../../header.jsp"%>
-<jsp:useBean id="bean" class="br.edu.ifg.bean.ordemservico.OrdemServicoBean" />
 
 <div class="container-fluid">
 	<form>
@@ -10,7 +9,7 @@
 					<label for="clienteInput">Cliente</label>
 					<select class="form-control" name="clienteId" id="clienteInput">
 						<option value="">Selecione um cliente</option>
-						<c:forEach var="cliente" items="${bean.clientes}" varStatus="id">
+						<c:forEach var="cliente" items="${clientes}">
 							<option value="${cliente.id}">${cliente.nome}</option>
 				        </c:forEach>
 					</select>
@@ -19,7 +18,7 @@
 					<label for="animalInput">Animal</label>
 					<select class="form-control" name="animalId" id="animalInput">
 						<option value="">Selecione um Animal</option>
-						<c:forEach var="animal" items="${bean.animais}" varStatus="id">
+						<c:forEach var="animal" items="${animais}" varStatus="id">
 							<option value="${animal.id}">${animal.nome}</option>
 				        </c:forEach>
 					</select>
@@ -42,7 +41,7 @@
 					<label for="servicoInput">Serviço</label>
 					<select class="form-control" name="servicoId" id="servicoInput">
 						<option value="">Selecione um Serviço</option>
-						<c:forEach var="servico" items="${bean.servicos}" varStatus="id">
+						<c:forEach var="servico" items="${servicos}" varStatus="id">
 							<option value="${servico.id}">${servico.nome}</option>
 				        </c:forEach>
 					</select>
@@ -64,7 +63,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="item" items="${bean.itensOrdemDeServico}" varStatus="id">
+					<c:forEach var="item" items="${itensOrdemDeServico}" varStatus="id">
 						<tr>
 							<td>${item.servico.nome}</td>
 							<td>${item.servico.preco}</td>

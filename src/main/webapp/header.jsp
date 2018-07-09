@@ -35,10 +35,10 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseOrdemServico">
             <li>
-              <a href="ordem-servico.jsp">Novo</a>
+              <a href="ordem-servico">Novo</a>
             </li>
             <li>
-              <a href="listar-ordem-servico.jsp">Listar</a>
+              <a href="listar-ordem-servico">Listar</a>
             </li>
           </ul>
         </li>
