@@ -1,8 +1,10 @@
 package br.edu.ifg.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +16,14 @@ import br.edu.ifg.dao.AnimalDAO;
 import br.edu.ifg.dao.ClienteDAO;
 import br.edu.ifg.dao.OrdemServicoDAO;
 import br.edu.ifg.dao.ServicoDAO;
+import br.edu.ifg.dao.UsuarioDAO;
 import br.edu.ifg.entity.Animal;
 import br.edu.ifg.entity.Cliente;
 import br.edu.ifg.entity.OrdemServico;
 import br.edu.ifg.entity.Servico;
+import br.edu.ifg.entity.Usuario;
+import br.edu.ifg.exception.ValidacaoException;
+import br.edu.ifg.form.OrdemServicoFormularioDTO;
 
 @Controller
 public class OrdemServicoController {
@@ -33,11 +39,34 @@ public class OrdemServicoController {
 
 	@Autowired
 	private ServicoDAO servicoDAO;
+	
+	@Autowired
+	private UsuarioDAO usuarioDAO;
 
 	@RequestMapping(value = "/api/ordem-servico", method = RequestMethod.POST)
-	public String salvar() {
+	public String salvar(OrdemServicoFormularioDTO form, HttpSession session, ModelMap model) {
 		System.out.println("Executando a lógica de salvamento");
-		return "ok";
+		
+		if (form.getClienteId() == null || form.getAnimalId() == null || form.getData() == null) {
+			throw new ValidacaoException("Preencha os campos obrigatórios!");
+		}		
+		
+		Cliente cliente = this.clienteDAO.encontrar(form.getClienteId());
+		Animal animal = this.animalDAO.encontrar(form.getAnimalId());
+		Usuario usuario = this.usuarioDAO.encontrar(1);
+		
+		OrdemServico ordemServico = new OrdemServico();
+		ordemServico.setCliente(cliente);
+		ordemServico.setAnimal(animal);
+		ordemServico.setDataServico(form.getData());
+		
+		ordemServico.setDataCad(new Date());
+		ordemServico.setUsuarioCad(usuario);
+		
+		ordemServico = ordemServicoDAO.salvar(ordemServico);
+		
+		model.addAttribute("successMsg", "Ordem de serviço salva com sucesso!");
+		return "listar-ordem-servico";
 	}
 	
 	@RequestMapping(value = "/api/ordem-servico", method = RequestMethod.PUT)

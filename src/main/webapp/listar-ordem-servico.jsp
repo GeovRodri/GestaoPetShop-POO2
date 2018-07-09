@@ -2,6 +2,12 @@
 <%@ include file="../../header.jsp"%>
 
 <div class="container-fluid">
+	<c:if test="is not empty successMsg">
+		<div class="alert alert-success" role="alert">
+		  ${successMsg}
+		</div>
+	</c:if>
+
 	<div class="table-responsive">
 		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 			<thead>

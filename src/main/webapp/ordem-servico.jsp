@@ -84,20 +84,20 @@
 
 <script>
   		function salvar() {
-  			if (!$('#clienteInput').val() || $('#animalInput').val() || $('#dataInput').val()) {
+  			if (!$('#clienteInput').val() || !$('#animalInput').val() || !$('#dataInput').val()) {
   				alert('Preencha todos os campos obrigatórios!');
   			} else {
   			
 	  			$.ajax({    
 	                type: 'POST',
-	                url: 'ordem-servico',
+	                url: '/api/ordem-servico',
 	                data: {
 	                	clienteId: $('#clienteInput').val(),
 	                	animalId: $('#animalInput').val(),
 	                	data: $('#dataInput').val()
 	                },
 	                success: function(){
-	                  alert('Ordem de Serviço salva com sucesso!');
+	                  	alert('Ordem de Serviço salva com sucesso!');
 	                },
 	                error: function(error){
 	                	alert('Erro ao salvar a ordem de servico!');
