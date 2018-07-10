@@ -4,13 +4,17 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifg.dao.AnimalDAO;
 import br.edu.ifg.dao.ClienteDAO;
@@ -44,29 +48,28 @@ public class OrdemServicoController {
 	private UsuarioDAO usuarioDAO;
 
 	@RequestMapping(value = "/api/ordem-servico", method = RequestMethod.POST)
-	public String salvar(OrdemServicoFormularioDTO form, HttpSession session, ModelMap model) {
-		System.out.println("Executando a lógica de salvamento");
-		
-		if (form.getClienteId() == null || form.getAnimalId() == null || form.getData() == null) {
-			throw new ValidacaoException("Preencha os campos obrigatórios!");
-		}		
-		
-		Cliente cliente = this.clienteDAO.encontrar(form.getClienteId());
-		Animal animal = this.animalDAO.encontrar(form.getAnimalId());
-		Usuario usuario = this.usuarioDAO.encontrar(1);
-		
-		OrdemServico ordemServico = new OrdemServico();
-		ordemServico.setCliente(cliente);
-		ordemServico.setAnimal(animal);
-		ordemServico.setDataServico(form.getData());
-		
-		ordemServico.setDataCad(new Date());
-		ordemServico.setUsuarioCad(usuario);
-		
-		ordemServico = ordemServicoDAO.salvar(ordemServico);
-		
-		model.addAttribute("successMsg", "Ordem de serviço salva com sucesso!");
-		return "listar-ordem-servico";
+	public String salvar(@ModelAttribute("ordemServicoForm") @Valid OrdemServicoFormularioDTO form, BindingResult result, Model model, final RedirectAttributes redirectAttributes) {		
+		if (result.hasErrors()) {
+			throw new ValidacaoException("Erro ao validar o formulario!");
+		} else {
+			
+			Cliente cliente = this.clienteDAO.encontrar(form.getClienteId());
+			Animal animal = this.animalDAO.encontrar(form.getAnimalId());
+			Usuario usuario = this.usuarioDAO.encontrar(1);
+			
+			OrdemServico ordemServico = new OrdemServico();
+			ordemServico.setCliente(cliente);
+			ordemServico.setAnimal(animal);
+			ordemServico.setDataServico(form.getData());
+			
+			ordemServico.setDataCad(new Date());
+			ordemServico.setUsuarioCad(usuario);
+			
+			ordemServico = ordemServicoDAO.salvar(ordemServico);
+			
+			model.addAttribute("successMsg", "Ordem de serviço salva com sucesso!");
+			return "listar-ordem-servico";
+		}
 	}
 	
 	@RequestMapping(value = "/api/ordem-servico", method = RequestMethod.PUT)
@@ -82,7 +85,7 @@ public class OrdemServicoController {
 	}
 	
 	@RequestMapping(value = "/ordem-servico", method = RequestMethod.GET)
-	public String ordemServico(ModelMap model, HttpServletRequest request) { 
+	public String ordemServico(@ModelAttribute("ordemServicoForm") @Valid OrdemServicoFormularioDTO form, ModelMap model, HttpServletRequest request) { 
 		List<Cliente> clientes = this.clienteDAO.getList();
 		List<Animal> animais = this.animalDAO.getList();
 		List<Servico> servicos = this.servicoDAO.getList();
