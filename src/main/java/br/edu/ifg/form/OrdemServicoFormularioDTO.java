@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import br.edu.ifg.entity.Servico;
-
 public class OrdemServicoFormularioDTO implements Serializable {
 	
 	private static final long serialVersionUID = 8984832253102853707L;
@@ -21,7 +19,7 @@ public class OrdemServicoFormularioDTO implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data;
 	
-	private List<Servico> servicos;
+	private List<Integer> servicos;
 	
 	public OrdemServicoFormularioDTO() {
 		super();
@@ -59,11 +57,11 @@ public class OrdemServicoFormularioDTO implements Serializable {
 		this.data = data;
 	}
 
-	public List<Servico> getServicos() {
+	public List<Integer> getServicos() {
 		return servicos;
 	}
 
-	public void setServicos(List<Servico> servicos) {
+	public void setServicos(List<Integer> servicos) {
 		this.servicos = servicos;
 	}
 }

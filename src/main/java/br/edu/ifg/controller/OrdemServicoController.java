@@ -8,13 +8,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifg.dao.AnimalDAO;
 import br.edu.ifg.dao.ClienteDAO;
@@ -23,6 +21,7 @@ import br.edu.ifg.dao.ServicoDAO;
 import br.edu.ifg.dao.UsuarioDAO;
 import br.edu.ifg.entity.Animal;
 import br.edu.ifg.entity.Cliente;
+import br.edu.ifg.entity.ItemOrdemServico;
 import br.edu.ifg.entity.OrdemServico;
 import br.edu.ifg.entity.Servico;
 import br.edu.ifg.entity.Usuario;
@@ -47,8 +46,8 @@ public class OrdemServicoController {
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 
-	@RequestMapping(value = "/api/ordem-servico", method = RequestMethod.POST)
-	public String salvar(@ModelAttribute("ordemServicoForm") @Valid OrdemServicoFormularioDTO form, BindingResult result, Model model, final RedirectAttributes redirectAttributes) {		
+	@RequestMapping(value = "/ordem-servico", method = RequestMethod.POST)
+	public String salvar(@ModelAttribute("ordemServicoForm") @Valid OrdemServicoFormularioDTO form, BindingResult result, ModelMap model) {		
 		if (result.hasErrors()) {
 			throw new ValidacaoException("Erro ao validar o formulario!");
 		} else {
@@ -65,20 +64,37 @@ public class OrdemServicoController {
 			ordemServico.setDataCad(new Date());
 			ordemServico.setUsuarioCad(usuario);
 			
+			if (form.getServicos() != null && !form.getServicos().isEmpty()) {
+				for (Integer servicoId : form.getServicos()) {
+					ItemOrdemServico item = new ItemOrdemServico();
+					
+					Servico servico = this.servicoDAO.encontrar(servicoId);
+					item.setServico(servico);
+					
+					item.setOrdemServico(ordemServico);	
+					item.setDataCad(new Date());
+					item.setUsuarioCad(usuario); 
+					
+					ordemServico.getItens().add(item);
+				}
+			}
+			
 			ordemServico = ordemServicoDAO.salvar(ordemServico);
 			
+			List<OrdemServico> listOrdemServico = this.ordemServicoDAO.getList();
+			model.addAttribute("listOrdemServico", listOrdemServico);
 			model.addAttribute("successMsg", "Ordem de serviço salva com sucesso!");
 			return "listar-ordem-servico";
 		}
 	}
 	
-	@RequestMapping(value = "/api/ordem-servico", method = RequestMethod.PUT)
+	@RequestMapping(value = "/ordem-servico", method = RequestMethod.PUT)
 	public String atualizar() {
 		System.out.println("Executando a lógica de atualizar");
 		return "ok";
 	}
 
-	@RequestMapping(value = "/api/ordem-servico", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/ordem-servico", method = RequestMethod.DELETE)
 	public String remover() {
 		System.out.println("Executando a lógica de remover");
 		return "ok";

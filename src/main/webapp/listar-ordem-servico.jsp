@@ -2,7 +2,7 @@
 <%@ include file="../../header.jsp"%>
 
 <div class="container-fluid">
-	<c:if test="is not empty successMsg">
+	<c:if test="${not empty successMsg}">
 		<div class="alert alert-success" role="alert">
 		  ${successMsg}
 		</div>

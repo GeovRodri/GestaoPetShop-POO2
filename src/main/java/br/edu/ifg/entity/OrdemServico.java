@@ -1,5 +1,6 @@
 package br.edu.ifg.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class OrdemServico extends EntidadeBase {
     private Usuario usuarioAlt;
     
     @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL)
-    private List<ItemOrdemServico> itens;
+    private List<ItemOrdemServico> itens = new ArrayList<>();
 
 	public Integer getId() {
 		return id;
