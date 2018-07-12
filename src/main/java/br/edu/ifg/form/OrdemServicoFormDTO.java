@@ -4,24 +4,31 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class OrdemServicoFormularioDTO implements Serializable {
+public class OrdemServicoFormDTO implements Serializable {
 	
 	private static final long serialVersionUID = 8984832253102853707L;
 	
 	private Integer id;
 	
+	@NotNull
 	private Integer clienteId;
 	
+	@NotNull
 	private Integer animalId;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data;
 	
+	@NotNull
+	@NotEmpty
 	private List<Integer> servicos;
 	
-	public OrdemServicoFormularioDTO() {
+	public OrdemServicoFormDTO() {
 		super();
 	}
 
