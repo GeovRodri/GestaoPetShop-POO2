@@ -1,4 +1,5 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../../header.jsp"%>
 
 <div class="container-fluid">
@@ -15,7 +16,7 @@
 					<th>Id</th>
 					<th>Cliente</th>
 					<th>Animal</th>
-					<th>Data</th>
+					<th style="text-align: center;">Data</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -25,9 +26,14 @@
 						<td>${ordemServico.id}</td>
 						<td>${ordemServico.cliente.nome}</td>
 						<td>${ordemServico.animal.nome}</td>
-						<td>${ordemServico.dataServico}</td>
-						<td>
-							Editar Excluir
+						<td style="text-align: center;"><fmt:formatDate pattern = "dd/MM/yyyy" value="${ordemServico.dataServico}"/></td>
+						<td style="text-align: center;">
+							<a href="javascript:void(0)" style="color: blue;">
+								<i class="fas fa-edit"></i>
+							</a>
+							<a href="javascript:void(0)"style="color: red;">
+								<i class="fas fa-trash-alt"></i>
+							</a>
 						</td>
 					</tr>
 				</c:forEach>

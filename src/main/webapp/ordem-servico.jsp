@@ -11,32 +11,35 @@
 		<div class="row">
 			<spring:bind path="clienteId">
 				<div class="col-md-4 form-group">
-					<label for="clienteInput">Cliente</label>
-					<select class="form-control ${status.error ? 'is-invalid' : ''}" name="clienteId" id="clienteInput">
-						<option value="">Selecione um cliente</option>
+					<label class="control-label">Cliente</label>
+					<form:select path="clienteId" class="form-control ${status.error ? 'is-invalid' : ''}">
+						<form:option value="">Selecione um cliente</form:option>
 						<c:forEach var="cliente" items="${clientes}">
-							<option value="${cliente.id}">${cliente.nome}</option>
+							<form:option value="${cliente.id}">${cliente.nome}</form:option>
 				        </c:forEach>
-					</select>
+					</form:select>
+					<form:errors path="clienteId" class="control-label" />
 				</div>
 			</spring:bind>
 			
 			<spring:bind path="animalId">
 				<div class="col-md-4 form-group">
-					<label for="animalInput">Animal</label>
-					<select class="form-control ${status.error ? 'is-invalid' : ''}" name="animalId" id="animalInput">
-						<option value="">Selecione um Animal</option>
+					<label class="control-label">Animal</label>
+					<form:select path="animalId" class="form-control ${status.error ? 'is-invalid' : ''}">
+						<form:option value="">Selecione um Animal</form:option>
 						<c:forEach var="animal" items="${animais}" varStatus="id">
-							<option value="${animal.id}">${animal.nome}</option>
+							<form:option value="${animal.id}">${animal.nome}</form:option>
 				        </c:forEach>
-					</select>
+					</form:select>
+					<form:errors path="animalId" class="control-label" />
 				</div>
 			</spring:bind>
 		
 			<spring:bind path="data">
 				<div class="col-md-4 form-group">
-					<label for="dataInput">Data</label> 
-					<input class="form-control ${status.error ? 'is-invalid' : ''}" id="dataInput" name="data" type="date">
+					<label class="control-label">Data</label> 
+					<form:input path="data" class="form-control ${status.error ? 'is-invalid' : ''}" type="date" />
+					<form:errors path="data" class="control-label" />
 				</div>
 			</spring:bind>
 		</div>
@@ -44,7 +47,7 @@
 		<div class="row">
 			<spring:bind path="servicos">
 				<div class="col-md-6 form-group">
-					<label>Serviços</label>
+					<label class="control-label">Serviços</label>
 					<form:select path="servicos" multiple="true" class="form-control ${status.error ? 'is-invalid' : ''}">
 					    <form:options items="${servicos}" itemLabel="tipo" itemValue="id" />
 					</form:select>

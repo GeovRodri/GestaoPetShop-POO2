@@ -11,9 +11,7 @@
   <!-- Bootstrap core CSS-->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
-  <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
-  <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
   <!-- Custom styles for this template-->
   <link href="assets/css/sb-admin.css" rel="stylesheet">
 </head>
@@ -30,7 +28,7 @@
         
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ordem de Serviço">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseOrdemServico" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
+            <i class="fas fa-angle-right"></i>
             <span class="nav-link-text">Ordem de Serviço</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseOrdemServico">
@@ -45,7 +43,7 @@
         
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Clientes">
        	  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseClientes" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
+            <i class="fas fa-angle-right"></i>
             <span class="nav-link-text">Clientes</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseClientes">
@@ -60,7 +58,7 @@
         
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Animais">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseAnimais" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
+            <i class="fas fa-angle-right"></i>
             <span class="nav-link-text">Animais</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseAnimais">
@@ -75,7 +73,7 @@
         
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ServiÃ§o">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseServico" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
+            <i class="fas fa-angle-right"></i>
             <span class="nav-link-text">Serviço</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseServico">
