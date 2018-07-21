@@ -22,6 +22,7 @@ import br.edu.ifg.dao.UsuarioDAO;
 import br.edu.ifg.entity.Animal;
 import br.edu.ifg.entity.Usuario;
 import br.edu.ifg.form.AnimalFormDTO;
+import br.edu.ifg.validator.AnimalFormValidator;
 
 @Controller
 public class AnimalController {

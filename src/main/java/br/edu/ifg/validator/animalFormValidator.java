@@ -9,7 +9,7 @@ import br.edu.ifg.form.AnimalFormDTO;
 import br.edu.ifg.form.OrdemServicoFormDTO;
 
 @Component
-public class animalFormValidator implements Validator {
+public class AnimalFormValidator implements Validator {
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -23,7 +23,7 @@ public class animalFormValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "id", "required.id", "Selecione um id para continuar");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "especie", "required.especie", "Selecione uma espécie");
 
-		if (form.getId() == null || form.getId().) {
+		if (form.getId() == null) {
 			errors.rejectValue("id", "required.id", "Selecione pelo menos um id");
 		}
 
