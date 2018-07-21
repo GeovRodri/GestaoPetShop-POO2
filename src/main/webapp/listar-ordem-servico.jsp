@@ -28,10 +28,11 @@
 						<td>${ordemServico.animal.nome}</td>
 						<td style="text-align: center;"><fmt:formatDate pattern = "dd/MM/yyyy" value="${ordemServico.dataServico}"/></td>
 						<td style="text-align: center;">
-							<a href="javascript:void(0)" style="color: blue;">
+							<a href="/ordem-servico/${ordemServico.id}" style="color: blue;">
 								<i class="fas fa-edit"></i>
 							</a>
-							<a href="javascript:void(0)"style="color: red;">
+							
+							<a href="/ordem-servico/${ordemServico.id}/delete" style="color: red;">
 								<i class="fas fa-trash-alt"></i>
 							</a>
 						</td>

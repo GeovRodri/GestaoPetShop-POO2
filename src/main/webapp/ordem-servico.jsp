@@ -6,7 +6,7 @@
 <!-- http://www.mkyong.com/spring-mvc/spring-mvc-form-handling-example/ -->
 
 <div class="container-fluid">
-	<form:form method="post" modelAttribute="ordemServicoForm" action="/ordem-servico">
+	<form:form method="post" modelAttribute="ordemServicoForm" action="/ordem-servico/${id != null ? id: ''}">
 		
 		<div class="row">
 			<spring:bind path="clienteId">
@@ -49,7 +49,7 @@
 				<div class="col-md-6 form-group">
 					<label class="control-label">Serviços</label>
 					<form:select path="servicos" multiple="true" class="form-control ${status.error ? 'is-invalid' : ''}">
-					    <form:options items="${servicos}" itemLabel="tipo" itemValue="id" />
+					    <form:options items="${listServicos}" itemLabel="tipo" itemValue="id" />
 					</form:select>
 					<form:errors path="servicos" class="control-label" />
 			  	</div>

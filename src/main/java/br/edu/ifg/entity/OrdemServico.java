@@ -59,7 +59,7 @@ public class OrdemServico extends EntidadeBase {
     @JoinColumn(name = "user_alt", nullable = true, updatable = false)
     private Usuario usuarioAlt;
     
-    @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemOrdemServico> itens = new ArrayList<>();
 
 	public Integer getId() {

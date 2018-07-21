@@ -9,11 +9,11 @@
   <meta name="author" content="">
   <title>Gestão de PetShop</title>
   <!-- Bootstrap core CSS-->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
   <!-- Custom styles for this template-->
-  <link href="assets/css/sb-admin.css" rel="stylesheet">
+  <link href="/assets/css/sb-admin.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -33,13 +33,14 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseOrdemServico">
             <li>
-              <a href="ordem-servico">Novo</a>
+              <a href="/ordem-servico">Novo</a>
             </li>
             <li>
-              <a href="listar-ordem-servico">Listar</a>
+              <a href="/listar-ordem-servico">Listar</a>
             </li>
           </ul>
         </li>
+        
         
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Clientes">
        	  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseClientes" data-parent="#exampleAccordion">
@@ -48,10 +49,10 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseClientes">
             <li>
-              <a href="cliente.jsp">Novo</a>
+              <a href="/cliente">Novo</a>
             </li>
             <li>
-              <a href="listar-clientes.jsp">Listar</a>
+              <a href="/listar-clientes">Listar</a>
             </li>
           </ul>
         </li>
@@ -63,10 +64,10 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseAnimais">
             <li>
-              <a href="animal.jsp">Novo</a>
+              <a href="/animal">Novo</a>
             </li>
             <li>
-              <a href="listar-animais.jsp">Listar</a>
+              <a href="/listar-animais">Listar</a>
             </li>
           </ul>
         </li>
@@ -78,10 +79,10 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseServico">
             <li>
-              <a href="servico.jsp">Novo</a>
+              <a href="/servico">Novo</a>
             </li>
             <li>
-              <a href="listar-servicos.jsp">Listar</a>
+              <a href="/listar-servicos">Listar</a>
             </li>
           </ul>
         </li>
