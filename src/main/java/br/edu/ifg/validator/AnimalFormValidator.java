@@ -6,7 +6,6 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import br.edu.ifg.form.AnimalFormDTO;
-import br.edu.ifg.form.OrdemServicoFormDTO;
 
 @Component
 public class AnimalFormValidator implements Validator {
