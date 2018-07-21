@@ -17,14 +17,8 @@ public class AnimalFormValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		AnimalFormDTO form = (AnimalFormDTO) target;
-
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "id", "required.id", "Selecione um id para continuar");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "especie", "required.especie", "Selecione uma espécie");
-
-		if (form.getId() == null) {
-			errors.rejectValue("id", "required.id", "Selecione pelo menos um id");
-		}
-
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required.nome", "Preencha o nome");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "especie", "required.especie", "Preencha uma espécie");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "raca", "required.raca", "Preencha uma raça");
 	}
 }

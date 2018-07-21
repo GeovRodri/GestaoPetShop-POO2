@@ -3,42 +3,36 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<!-- http://www.mkyong.com/spring-mvc/spring-mvc-form-handling-example/ -->
-
 <div class="container-fluid">
-	<form:form method="post" modelAttribute="animalForm" action="/animal">
+	<form:form method="post" modelAttribute="animalForm" action="/animal/${id != null ? id: ''}">
 
 		<div class="row">
-			<!-- O nome que fica no path é o mesmo nome que vc quer mapear la no seu AnimalFormDTO-->
 			<spring:bind path="nome">
-				<div class="col-md-4 form-group">
-					<label for="nomeInput">Nome</label> 
-					<!-- Colocar o campo que vc quer, no caso se for um texto tem que ser um input do tipo text -->
-					<input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" name="nome" id="nomeInput">
-				</div>
-			</spring:bind>
-		</div>
-		
-			<spring:bind path="id">
-				<div class="col-md-4 form-group">
-					<label for="idInput">ID</label> 
-					<input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" name="id" id="idInput">
+				<div class="col-md-6 form-group">
+					<label class="control-label">Nome</label> 
+					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="nome" />
+					<form:errors path="nome" class="control-label" />
 				</div>
 			</spring:bind>
 			
 			<spring:bind path="especie">
-				<div class="col-md-4 form-group">
-					<label for="especieInput">Espécie</label> 
-					<input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" name="especie" id="especieInput">
+				<div class="col-md-6 form-group">
+					<label class="control-label">Espécie</label> 
+					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="especie" />
+					<form:errors path="especie" class="control-label" />
 				</div>
 			</spring:bind>
-			
+		</div>
+		
+		<div class="row">	
 			<spring:bind path="raca">
-				<div class="col-md-4 form-group">
-					<label for="racaInput">Raça</label> 
-					<input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" name="raca" id="racaInput">
+				<div class="col-md-6 form-group">
+					<label class="control-label">Raça</label> 
+					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="raca" />
+					<form:errors path="raca" class="control-label" />
 				</div>
 			</spring:bind>
+		</div>
 
 		<div align="right">
 			<button type="submit" class="btn btn-primary">Salvar</button>

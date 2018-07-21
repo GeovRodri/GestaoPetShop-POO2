@@ -64,7 +64,7 @@ public class OrdemServicoController {
 	}
 	
 	@RequestMapping(value = "/ordem-servico/{id}", method = RequestMethod.POST)
-	public String atualizar(@ModelAttribute("ordemServicoForm") OrdemServicoFormDTO form, @PathVariable("id") Integer id, 
+	public String atualizar(@ModelAttribute("ordemServicoForm") @Valid OrdemServicoFormDTO form, @PathVariable("id") Integer id, 
 			BindingResult result, ModelMap modelMap) {
 		
 		OrdemServico ordemServico = this.ordemServicoDAO.encontrar(id);
@@ -125,6 +125,8 @@ public class OrdemServicoController {
 			populateDefaultModel(modelMap);
 			return "ordem-servico";
 		} else {
+			ordemServico.setItens(new ArrayList<>());
+			
 			Cliente cliente = this.clienteDAO.encontrar(form.getClienteId());
 			Animal animal = this.animalDAO.encontrar(form.getAnimalId());
 			Usuario usuario = this.usuarioDAO.encontrar(1);

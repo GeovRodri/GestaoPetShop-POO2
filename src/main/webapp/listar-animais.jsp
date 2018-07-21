@@ -3,34 +3,39 @@
 
 <div class="container-fluid">
 	<c:if test="${not empty successMsg}">
-		<div class="alert alert-success" role="alert">${successMsg}</div>
+		<div class="alert alert-success" role="alert">
+		  ${successMsg}
+		</div>
 	</c:if>
 
 	<div class="table-responsive">
 		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 			<thead>
 				<tr>
-					<!-- Titulo das tabelas -->
 					<th>Id</th>
-					<th>Animal</th>
+					<th>Nome</th>
 					<th>Espécie</th>
 					<th>Raça</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
-				<!-- Esse items tem que ser igual ao nome que vc colocou lá no controller, no metodo listar-animal -->
-				<c:forEach var="animal" items="${listAnimal}" varStatus="id">
+				<c:forEach var="animal" items="${listAnimais}" varStatus="id">
 					<tr>
-						<!-- Conteudo das tabelas -->
-						<!-- Antes de colocar os campos aqui verificar no Animal.java -->
 						<td>${animal.id}</td>
-						<td>${animal.dono.nome}</td>
-						<td>${animal.idade}</td>
+						<td>${animal.nome}</td>
+						<td>${animal.especie}</td>
+						<td>${animal.raca}</td>
 						
-						<!-- Tem que transformar esses dois em links um para remover e o outro para atualizar -->
-						<!-- Mas primeiro termina o cadastro e a listagem -->
-						<td>Editar Excluir</td>
+						<td style="text-align: center;">
+							<a href="/animal/${animal.id}" style="color: blue;">
+								<i class="fas fa-edit"></i>
+							</a>
+							
+							<a href="/animal/${animal.id}/delete" style="color: red;">
+								<i class="fas fa-trash-alt"></i>
+							</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -1,10 +1,7 @@
 package br.edu.ifg.form;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
 
 public class AnimalFormDTO implements Serializable {
 	
@@ -12,8 +9,6 @@ public class AnimalFormDTO implements Serializable {
 	
 	private Integer id;
 	
-	// TODO: Os campos estão errados, verificar na classe Animal.java quais campos esse cadastro tem ok
-	// Após verificar mapear aqui com o mesmo nome que vc colocou no path lá no JSP ok
 	@NotNull
 	private String nome;
 	
@@ -22,8 +17,6 @@ public class AnimalFormDTO implements Serializable {
 	
 	@NotNull
 	private String raca;
-	
-	@NotNull
 		
 	public AnimalFormDTO() {
 		super();
@@ -61,5 +54,4 @@ public class AnimalFormDTO implements Serializable {
 	public void setRaca(String raca) {
 		this.raca = raca;
 	}
-
 }

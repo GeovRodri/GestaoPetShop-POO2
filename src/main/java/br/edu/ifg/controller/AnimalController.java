@@ -3,17 +3,16 @@ package br.edu.ifg.controller;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -33,65 +32,89 @@ public class AnimalController {
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 	
-	// TODO: Importar o validator que vc criou
-	
 	@Autowired
 	AnimalFormValidator animalFormValidator;
 	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
-		// TODO: Criar o validator e descomentar o código depois
 		binder.setValidator(animalFormValidator);
 	}
 
 	@RequestMapping(value = "/animal", method = RequestMethod.POST)
-	public String salvar(@ModelAttribute("animalForm") @Valid AnimalFormDTO form, BindingResult result, Model model, ModelMap modelMap) {		
+	public String salvar(@ModelAttribute("animalForm") @Valid AnimalFormDTO form, BindingResult result, ModelMap modelMap) {		
+		Animal animal = new Animal();
+		return saveOrUpdate(form, result, modelMap, animal);
+	}
+	
+	@RequestMapping(value = "/animal/{id}", method = RequestMethod.POST)
+	public String atualizar(@ModelAttribute("animalForm") @Valid AnimalFormDTO form, @PathVariable("id") Integer id, 
+			BindingResult result, ModelMap modelMap) {
+		
+		Animal animal = this.animalDAO.encontrar(id);
+		return saveOrUpdate(form, result, modelMap, animal);
+	}
+
+	@RequestMapping(value = "/animal/{id}/delete", method = RequestMethod.GET)
+	public String remover(@PathVariable("id") Integer id, ModelMap modelMap) {
+		this.animalDAO.remover(id);
+		
+		List<Animal> listAnimais = this.animalDAO.getList();
+		modelMap.addAttribute("listAnimais", listAnimais);
+		modelMap.addAttribute("successMsg", "Animal removido com sucesso!");
+		return "listar-animais";
+	}
+	
+	@RequestMapping(value = "/animal/{id}", method = RequestMethod.GET)
+	public String updateOrdemServico(@ModelAttribute("animalForm") AnimalFormDTO form, @PathVariable("id") Integer id, ModelMap model) { 
+		Animal animal = this.animalDAO.encontrar(id);
+		
+		if (animal != null) {
+			form.setId(animal.getId());
+			form.setNome(animal.getNome());
+			form.setRaca(animal.getRaca());
+			form.setEspecie(animal.getEspecie());
+		}
+		
+		return "animal";
+	}
+	
+	@RequestMapping(value = "/animal", method = RequestMethod.GET)
+	public String ordemServico(@ModelAttribute("animalForm") AnimalFormDTO form, ModelMap model) { 
+		return "animal";
+	}
+
+	@RequestMapping(value = "/listar-animais", method = RequestMethod.GET)
+	public String listarOrdemServico(ModelMap model) { 
+		List<Animal> listAnimais = this.animalDAO.getList();
+		model.addAttribute("listAnimais", listAnimais);
+		return "listar-animais";
+	}
+	
+	private String saveOrUpdate(AnimalFormDTO form, BindingResult result, ModelMap modelMap, Animal animal) {
 		if (result.hasErrors()) {
 			return "animal";
 		} else {
 			Usuario usuario = this.usuarioDAO.encontrar(1);
 			
-			Animal animal = new Animal();
-			// preencher cadastro do animal com os campos do formulario
+			// Preenchendo entidade
+			animal.setNome(form.getNome());
+			animal.setRaca(form.getRaca());
+			animal.setEspecie(form.getEspecie());
 			
+			// Setando informações para log
 			animal.setDataCad(new Date());
 			animal.setUsuarioCad(usuario);
 			
-			animal = animalDAO.salvar(animal);
+			if (animal.getId() != null) {
+				animal = animalDAO.atualizar(animal);
+			} else {
+				animal = animalDAO.salvar(animal);
+			}
 			
-			List<Animal> listAnimal = this.animalDAO.getList();
-			modelMap.addAttribute("listAnimal", listAnimal);
-			modelMap.addAttribute("successMsg", "Animal inserido com sucesso!");
-			return "listar-animal";
+			List<Animal> listAnimais = this.animalDAO.getList();
+			modelMap.addAttribute("listAnimais", listAnimais);
+			modelMap.addAttribute("successMsg", "Animal salvo com sucesso!");
+			return "listar-animais";
 		}
-	}
-	
-	@RequestMapping(value = "/animal", method = RequestMethod.PUT)
-	public String atualizar() {
-		// TODO: Criar metodo de atualizar o animal
-		System.out.println("Executando a lógica de atualizar");
-		return "ok";
-	}
-
-	@RequestMapping(value = "/animal", method = RequestMethod.DELETE)
-	public String remover() {
-		// TODO: criar metodo de remover o animal
-		System.out.println("Executando a lógica de remover");
-		return "ok";
-	}
-	
-	@RequestMapping(value = "/animal", method = RequestMethod.GET)
-	public String animal(@ModelAttribute("animalForm") AnimalFormDTO form, ModelMap model, HttpServletRequest request) { 
-		List<Animal> animais = this.animalDAO.getList();
-		model.addAttribute("animais", animais);
-		
-		return "animal";
-	}
-
-	@RequestMapping(value = "/listar-animal", method = RequestMethod.GET)
-	public String listarAnimal(ModelMap model, HttpServletRequest request) { 
-		List<Animal> listAnimal = this.animalDAO.getList();
-		model.addAttribute("listAnimal", listAnimal);
-		return "listar-animal";
 	}
 }
