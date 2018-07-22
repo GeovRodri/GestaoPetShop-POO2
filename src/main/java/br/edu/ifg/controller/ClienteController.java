@@ -1,5 +1,7 @@
 package br.edu.ifg.controller;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +26,7 @@ import br.edu.ifg.form.ClienteFormDTO;
 import br.edu.ifg.validator.ClienteFormValidator;
 
 @Controller
-public class ClienteController {
+public class ClienteController extends Thread{
 	
 	@Autowired
 	private ClienteDAO clienteDAO;
@@ -121,5 +123,17 @@ public class ClienteController {
 			return "listar-clientes";
 		}
 	}
-
+	
+	@RequestMapping(value = "/listar-clientes", method = RequestMethod.GET)
+	public String criarCSV(@PathVariable("id") Integer id, ModelMap modelMap){ 
+		List<Cliente> listClientes = this.clienteDAO.getList();
+		modelMap.addAttribute("successMsg", "Gerando arquivo csv");
+		
+		Thread csv = new Thread();
+		generateCsvFile("E://test.csv", listClientes);
+		
+		return "listar-clientes";
+	}
+	
+	
 }
