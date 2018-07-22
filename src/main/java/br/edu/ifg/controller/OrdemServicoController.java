@@ -120,6 +120,14 @@ public class OrdemServicoController {
 		return "listar-ordem-servico";
 	}
 	
+	@RequestMapping(value = "/listar-ordem-servico", method = RequestMethod.GET)
+	public List<OrdemServico> listarCSV(ModelMap model) { 
+		List<OrdemServico> listOrdemServico = this.ordemServicoDAO.getList();
+		model.addAttribute("listOrdemServico", listOrdemServico);
+		model.addAttribute("successMsg", "Gerando relatório .CSV");
+		return listOrdemServico;
+	}
+	
 	private String saveOrUpdate(OrdemServicoFormDTO form, BindingResult result, ModelMap modelMap, OrdemServico ordemServico) {
 		if (result.hasErrors()) {
 			populateDefaultModel(modelMap);
@@ -175,12 +183,5 @@ public class OrdemServicoController {
 		model.addAttribute("animais", animais);
 		model.addAttribute("listServicos", servicos);
 	}
-	
-	@RequestMapping(value = "/listar-ordem-servico", method = RequestMethod.POST)
-	public String criarCSV(@ModelAttribute("ordemServicoForm") @Valid OrdemServicoFormDTO form, BindingResult result, ModelMap modelMap) {		
-		modelMap.addAttribute("successMsg", "Gerando relatório .CSV!");
-		return "listar-ordem-servico";
-	}
-	
-	
+		
 }
