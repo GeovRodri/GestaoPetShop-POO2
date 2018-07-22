@@ -40,6 +40,9 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<div align="right">
+			<button type="submit" class="btn btn-primary">Criar CSV</button>
+		</div>
 	</div>
 </div>
 
