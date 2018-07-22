@@ -124,13 +124,6 @@ public class ClienteController extends Thread{
 		}
 	}
 	
-	@RequestMapping(value = "/listar-clientes", method = RequestMethod.GET)
-	public String criarCSV(@PathVariable("id") Integer id, ModelMap modelMap){ 
-		List<Cliente> listClientes = this.clienteDAO.getList();
-		modelMap.addAttribute("successMsg", "Gerando arquivo csv");		
-		
-		return "listar-clientes";
-	}
 	
 	
 }
