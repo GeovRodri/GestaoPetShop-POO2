@@ -1,11 +1,11 @@
 package br.edu.ifg.form;
 
 import java.io.Serializable;
-import java.util.Date;
+//import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-import org.springframework.format.annotation.DateTimeFormat;
+//import org.springframework.format.annotation.DateTimeFormat;
 
 public class ClienteFormDTO  implements Serializable{
 	
@@ -13,19 +13,19 @@ private static final long serialVersionUID = 8984832253102853707L;
 	
 	private Integer id;
 	
-	
-	private Integer cpf;
+	@NotNull
+	private String cpf;
 		
-	
+	@NotNull
 	private String endereco;
 	
 	@NotNull
 	private String nome;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date dt_cad;
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+	//private Date dataCad;
 	
-	
+	@NotNull
 	private String telefone;
 	
 	public ClienteFormDTO() {
@@ -40,11 +40,13 @@ private static final long serialVersionUID = 8984832253102853707L;
 		this.id = id;
 	}
 
-	public Integer getCpf() {
+	
+
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(Integer cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
@@ -64,13 +66,13 @@ private static final long serialVersionUID = 8984832253102853707L;
 		this.nome = nome;
 	}
 
-	public Date getDt_cad() {
-		return dt_cad;
+	/*public Date getDataCad() {
+		return dataCad;
 	}
 
-	public void setDt_cad(Date dt_cad) {
-		this.dt_cad = dt_cad;
-	}
+	public void setDataCad(Date dataCad) {
+		this.dataCad = dataCad;
+	}*/
 
 	public String getTelefone() {
 		return telefone;

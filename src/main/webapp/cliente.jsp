@@ -1,58 +1,52 @@
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ include file="../../header.jsp"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 
 <div class="container-fluid">
-<div class="container-fluid">
-	<form:form method="post" modelAttribute="clienteForm" action="/cliente">
+	<form:form method="post" modelAttribute="clienteForm" action="/cliente/${id != null ? id: ''}">
 		
 		<div class="row">
 			<spring:bind path="nome">
 				<div class="col-md-4 form-group">
-					<label>Nome</label>
-					<input type="text" name="nome"/>
+					<label class="control-label">Nome</label> 
+					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="nome" />
+					<form:errors path="nome" class="control-label" />
 				</div>
 			</spring:bind>
-		</div>
-		
-		<div class="row">
+			
 			<spring:bind path="cpf">
 				<div class="col-md-4 form-group">
-					<label>CPF</label>
-					<input type="number" name="cpf"/>
+					<label class="control-label">CPF</label> 
+					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="cpf" />
+					<form:errors path="cpf" class="control-label" />
 				</div>
 			</spring:bind>
 		</div>
-		
-		<div class="row">
+			
+		<div class="row">	
 			<spring:bind path="endereco">
 				<div class="col-md-4 form-group">
-					<label>EndereÃ§o</label>
-					<input type="text" name="endereco"/>
+					<label class="control-label">Endereço</label> 
+					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="endereco" />
+					<form:errors path="endereco" class="control-label" />
 				</div>
 			</spring:bind>
-		</div>
-		
-		<div class="row">
+			
 			<spring:bind path="telefone">
 				<div class="col-md-4 form-group">
-					<label>Telefone</label>
-					<input type="text" name="telefone"/>
+					<label class="control-label">Telefone</label> 
+					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="telefone" />
+					<form:errors path="telefone" class="control-label" />
 				</div>
 			</spring:bind>
 		</div>
-		
-		
-		<spring:bind path="dt_cad">
-			<div class="col-md-4 form-group">
-				<label for="dataInput">Data</label> 
-				<input class="form-control ${status.error ? 'is-invalid' : ''}" id="dataInput" name="dt_cad" type="date">
-			</div>
-		</spring:bind>
-		
 		
 		<div align="right">
 			<button type="submit" class="btn btn-primary">Salvar</button>
 		</div>
 		
 	</form:form>
-
+</div>
 <%@ include file="../../footer.jsp"%>
