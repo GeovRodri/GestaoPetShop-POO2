@@ -41,7 +41,7 @@
 			</tbody>
 		</table>
 		<div align="right">
-			<button type="submit" class="btn btn-primary">Criar CSV</button>
+			<button type="submit" name = "criarCSV" class="btn btn-primary">Criar CSV</button>
 		</div>
 	</div>
 </div>

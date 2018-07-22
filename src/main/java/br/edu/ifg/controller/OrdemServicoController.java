@@ -175,4 +175,12 @@ public class OrdemServicoController {
 		model.addAttribute("animais", animais);
 		model.addAttribute("listServicos", servicos);
 	}
+	
+	@RequestMapping(value = "/listar-ordem-servico", method = RequestMethod.POST)
+	public String criarCSV(@ModelAttribute("ordemServicoForm") @Valid OrdemServicoFormDTO form, BindingResult result, ModelMap modelMap) {		
+		modelMap.addAttribute("successMsg", "Gerando relatório .CSV!");
+		return "listar-ordem-servico";
+	}
+	
+	
 }
