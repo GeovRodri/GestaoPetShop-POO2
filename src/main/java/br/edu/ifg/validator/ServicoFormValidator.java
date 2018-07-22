@@ -6,6 +6,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import br.edu.ifg.form.ClienteFormDTO;
+import br.edu.ifg.form.ServicoFormDTO;
 
 @Controller
 public class ServicoFormValidator implements Validator{
