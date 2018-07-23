@@ -8,8 +8,14 @@
 		  ${successMsg}
 		</div>
 	</c:if>
+	
+	<div align="right">
+			<a type="button" href=/listar-ordem-servico/gerar 
+			name="listarCSV" class="btn btn-primary">Gerar CSV</a>
+	</div>
 
 	<div class="table-responsive">
+		
 		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 			<thead>
 				<tr>
@@ -40,9 +46,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<div align="right">
-			<button type="submit" name = "criarCSV" class="btn btn-primary">Criar CSV</button>
-		</div>
 	</div>
 </div>
 
