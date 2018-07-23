@@ -13,14 +13,17 @@ public class GenerateCsvFile extends Thread{
 	
 		OrdemServicoDAO OsDAO = new OrdemServicoDAO();
 		List<OrdemServico> listarOS = OsDAO.getList();
-		String sFileName = null;
+		String sFileName = "ordens_de_servico.csv";
 		   
 		try {
 	        FileWriter writer = new FileWriter(sFileName);
-	        int i;
-	        for(i=0; i<listarOS.size(); i++ ){
-	        	writer.append((CharSequence) listarOS.get(i));
+	        CharSequence[] osText = new CharSequence[listarOS.size()];
+	        int index = 0;
+	        for(OrdemServico os : listarOS){
+	        	osText[index++] = os.getCliente().getNome() + " " + os.getAnimal().getNome();
 	        };
+	        
+	        
 	        writer.flush();
 	        writer.close();
 	    }catch(IOException e){

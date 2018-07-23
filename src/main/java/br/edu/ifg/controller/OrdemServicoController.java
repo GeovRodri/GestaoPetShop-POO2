@@ -120,7 +120,7 @@ public class OrdemServicoController {
 		return "listar-ordem-servico";
 	}
 	
-	@RequestMapping(value = "/listar-ordem-servico", method = RequestMethod.GET)
+	@RequestMapping(value = "/listar-ordem-servico/gerar", method = RequestMethod.GET)
 	public List<OrdemServico> listarCSV(ModelMap model) { 
 		List<OrdemServico> listOrdemServico = this.ordemServicoDAO.getList();
 		model.addAttribute("listOrdemServico", listOrdemServico);
