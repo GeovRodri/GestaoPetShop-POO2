@@ -7,6 +7,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -29,6 +30,7 @@ import br.edu.ifg.entity.OrdemServico;
 import br.edu.ifg.entity.Servico;
 import br.edu.ifg.entity.Usuario;
 import br.edu.ifg.form.OrdemServicoFormDTO;
+import br.edu.ifg.thread.GenerateCsvFile;
 import br.edu.ifg.validator.OrdemServicoFormValidator;
 
 @Controller
@@ -48,6 +50,9 @@ public class OrdemServicoController {
 	
 	@Autowired
 	private UsuarioDAO usuarioDAO;
+	
+	@Autowired
+	private ApplicationContext applicationContext;
 	
 	@Autowired
 	OrdemServicoFormValidator ordemServicoFormValidator;
@@ -121,11 +126,18 @@ public class OrdemServicoController {
 	}
 	
 	@RequestMapping(value = "/listar-ordem-servico/gerar", method = RequestMethod.GET)
-	public List<OrdemServico> listarCSV(ModelMap model) { 
+	public String listarCSV(ModelMap model) { 
+		
+		// Inicializando thread para a geração dos csv
+		GenerateCsvFile thread = new GenerateCsvFile();
+		applicationContext.getAutowireCapableBeanFactory().autowireBean(thread); // adicionando ao contexto do spring
+		thread.start();
+		
+		// Retornando para a tela com a mensagem de geração do csv
 		List<OrdemServico> listOrdemServico = this.ordemServicoDAO.getList();
 		model.addAttribute("listOrdemServico", listOrdemServico);
-		model.addAttribute("successMsg", "Gerando relatório .CSV");
-		return listOrdemServico;
+		model.addAttribute("successMsg", "Gerando relatório CSV");
+		return "listar-ordem-servico";
 	}
 	
 	private String saveOrUpdate(OrdemServicoFormDTO form, BindingResult result, ModelMap modelMap, OrdemServico ordemServico) {

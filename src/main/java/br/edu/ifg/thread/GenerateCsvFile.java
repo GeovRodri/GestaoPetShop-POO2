@@ -3,26 +3,28 @@ package br.edu.ifg.thread;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import br.edu.ifg.dao.OrdemServicoDAO;
-import br.edu.ifg.entity.Cliente;
 import br.edu.ifg.entity.OrdemServico;
 
-public class GenerateCsvFile extends Thread{
+public class GenerateCsvFile extends Thread {
+	
+	@Autowired
+	private OrdemServicoDAO ordemServicoDAO;
 	
 	public void run(){
-	
-		OrdemServicoDAO OsDAO = new OrdemServicoDAO();
-		List<OrdemServico> listarOS = OsDAO.getList();
+		List<OrdemServico> listarOS = ordemServicoDAO.listarComFatch();
 		String sFileName = "ordens_de_servico.csv";
 		   
 		try {
 	        FileWriter writer = new FileWriter(sFileName);
-	        CharSequence[] osText = new CharSequence[listarOS.size()];
-	        int index = 0;
-	        for(OrdemServico os : listarOS){
-	        	osText[index++] = os.getCliente().getNome() + " " + os.getAnimal().getNome();
-	        };
 	        
+	        for(OrdemServico os : listarOS){
+	        	CharSequence osText = os.getId() + ", " + os.getCliente().getNome() + ", " + os.getAnimal().getNome() + "\n";
+	        	writer.append(osText);
+	        };
 	        
 	        writer.flush();
 	        writer.close();

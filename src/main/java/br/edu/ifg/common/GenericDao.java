@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public abstract class GenericDao<T, I extends Serializable> {
 
 	@PersistenceContext
-	private EntityManager entityManager;
+	protected EntityManager entityManager;
 	private Class<T> persistedClass;
 
 	protected GenericDao() { }
