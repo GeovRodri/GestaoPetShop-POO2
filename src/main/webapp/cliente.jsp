@@ -23,6 +23,14 @@
 					<form:errors path="cpf" class="control-label" />
 				</div>
 			</spring:bind>
+			
+			<spring:bind path="telefone">
+				<div class="col-md-4 form-group">
+					<label class="control-label">Telefone</label> 
+					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="telefone" />
+					<form:errors path="telefone" class="control-label" />
+				</div>
+			</spring:bind>
 		</div>
 			
 		<div class="row">	
@@ -31,14 +39,6 @@
 					<label class="control-label">Endereço</label> 
 					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="endereco" />
 					<form:errors path="endereco" class="control-label" />
-				</div>
-			</spring:bind>
-			
-			<spring:bind path="telefone">
-				<div class="col-md-4 form-group">
-					<label class="control-label">Telefone</label> 
-					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="telefone" />
-					<form:errors path="telefone" class="control-label" />
 				</div>
 			</spring:bind>
 		</div>

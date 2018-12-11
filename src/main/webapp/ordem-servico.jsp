@@ -49,7 +49,7 @@
 				<div class="col-md-6 form-group">
 					<label class="control-label">Serviços</label>
 					<form:select path="servicos" multiple="true" class="form-control ${status.error ? 'is-invalid' : ''}">
-					    <form:options items="${listServicos}" itemLabel="tipo" itemValue="id" />
+					    <form:options items="${listServicos}" itemLabel="tipoeValor" itemValue="id" />
 					</form:select>
 					<form:errors path="servicos" class="control-label" />
 			  	</div>

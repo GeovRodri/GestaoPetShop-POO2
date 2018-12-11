@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.edu.ifg.common.EntidadeBase;
+import br.edu.ifg.util.Utils;
 
 @Entity
 @Table(name = "servico")
@@ -51,6 +52,8 @@ public class Servico extends EntidadeBase {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_alt", nullable = true, updatable = false)
     private Usuario usuarioAlt;
+    
+    
 
 	public Integer getId() {
 		return id;
@@ -114,5 +117,9 @@ public class Servico extends EntidadeBase {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public String getTipoeValor(){
+		return this.tipo + " (R$ " + Utils.formatarValor(this.valor.doubleValue()) + ")";
 	}
 }
