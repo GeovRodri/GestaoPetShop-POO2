@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.edu.ifg.common.EntidadeBase;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "animal")
@@ -39,6 +40,12 @@ public class Animal extends EntidadeBase {
     @Temporal(TemporalType.DATE)
     private Date dataCad;
 
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cliente_id", nullable = false, updatable = false)
+	private Cliente cliente;
+
+	@JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_cad", nullable = false, updatable = false)
     private Usuario usuarioCad;
@@ -47,6 +54,7 @@ public class Animal extends EntidadeBase {
     @Temporal(TemporalType.DATE)
     private Date dataAlt;
 
+	@JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_alt", nullable = true, updatable = false)
     private Usuario usuarioAlt;
@@ -113,5 +121,17 @@ public class Animal extends EntidadeBase {
 
 	public void setRaca(String raca) {
 		this.raca = raca;
+	}
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 }

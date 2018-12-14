@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import br.edu.ifg.dao.ClienteDAO;
+import br.edu.ifg.entity.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,6 +33,9 @@ public class AnimalController {
 
 	@Autowired
 	private UsuarioDAO usuarioDAO;
+
+	@Autowired
+	private ClienteDAO clienteDAO;
 	
 	@Autowired
 	AnimalFormValidator animalFormValidator;
@@ -95,11 +100,13 @@ public class AnimalController {
 			return "animal";
 		} else {
 			Usuario usuario = this.usuarioDAO.encontrar(1);
+			Cliente cliente = this.clienteDAO.encontrar(form.getCliente());
 			
 			// Preenchendo entidade
 			animal.setNome(form.getNome());
 			animal.setRaca(form.getRaca());
 			animal.setEspecie(form.getEspecie());
+			animal.setCliente(cliente);
 			
 			// Setando informações para log
 			animal.setDataCad(new Date());

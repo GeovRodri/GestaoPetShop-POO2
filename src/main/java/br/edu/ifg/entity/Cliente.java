@@ -1,19 +1,13 @@
 package br.edu.ifg.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
+
 import br.edu.ifg.common.EntidadeBase;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "cliente")
@@ -37,6 +31,9 @@ public class Cliente extends EntidadeBase {
     
     @Column(name = "endereco", nullable = true)
     private String endereco;
+
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	private List<Animal> animais = new ArrayList<>();
 
     @Column(name = "dt_cad", nullable = false, updatable = false)
     @Temporal(TemporalType.DATE)
@@ -124,5 +121,13 @@ public class Cliente extends EntidadeBase {
 
 	public void setUsuarioAlt(Usuario usuarioAlt) {
 		this.usuarioAlt = usuarioAlt;
+	}
+
+	public List<Animal> getAnimais() {
+		return animais;
+	}
+
+	public void setAnimais(List<Animal> animais) {
+		this.animais = animais;
 	}
 }

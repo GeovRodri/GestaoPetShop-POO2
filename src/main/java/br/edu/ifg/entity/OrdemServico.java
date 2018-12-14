@@ -30,10 +30,6 @@ public class OrdemServico extends EntidadeBase {
     @Column(name = "id", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_cliente", nullable = false, updatable = false)
-    private Cliente cliente;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_animal", nullable = false, updatable = false)
@@ -112,14 +108,6 @@ public class OrdemServico extends EntidadeBase {
 
 	public void setUsuarioAlt(Usuario usuarioAlt) {
 		this.usuarioAlt = usuarioAlt;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
 	}
 
 	public Animal getAnimal() {

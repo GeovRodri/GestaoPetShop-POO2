@@ -8,15 +8,13 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import br.edu.ifg.dao.AnimalDAO;
 import br.edu.ifg.dao.ClienteDAO;
@@ -94,7 +92,7 @@ public class OrdemServicoController {
 		
 		if (ordemServico != null) {
 			form.setId(ordemServico.getId());
-			form.setClienteId(ordemServico.getCliente().getId());
+			form.setClienteId(ordemServico.getAnimal().getCliente().getId());
 			form.setAnimalId(ordemServico.getAnimal().getId());
 			form.setData(ordemServico.getDataServico());
 			form.setRecurringService(ordemServico.getRecurringService());
@@ -117,6 +115,18 @@ public class OrdemServicoController {
 	public String ordemServico(@ModelAttribute("ordemServicoForm") OrdemServicoFormDTO form, ModelMap model) { 
 		populateDefaultModel(model);
 		return "ordem-servico";
+	}
+
+	@RequestMapping(value = "/buscar-animais-cliente/{id}", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<List<Animal>> buscarAnimais(@PathVariable("id") Integer id) {
+		Cliente cliente = this.clienteDAO.encontrar(id);
+		List<Animal> animais = new ArrayList<>();
+
+		if (cliente != null && !cliente.getAnimais().isEmpty()) {
+			animais = cliente.getAnimais();
+		}
+
+		return new ResponseEntity<>(animais, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/listar-ordem-servico", method = RequestMethod.GET)
@@ -147,12 +157,9 @@ public class OrdemServicoController {
 			return "ordem-servico";
 		} else {
 			ordemServico.setItens(new ArrayList<>());
-			
-			Cliente cliente = this.clienteDAO.encontrar(form.getClienteId());
 			Animal animal = this.animalDAO.encontrar(form.getAnimalId());
 			Usuario usuario = this.usuarioDAO.encontrar(1);
 			
-			ordemServico.setCliente(cliente);
 			ordemServico.setAnimal(animal);
 			ordemServico.setDataServico(form.getData());
 			

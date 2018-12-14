@@ -22,7 +22,7 @@ public class GenerateCsvFile extends Thread {
 	        FileWriter writer = new FileWriter(sFileName);
 	        
 	        for(OrdemServico os : listarOS){
-	        	CharSequence osText = os.getId() + ", " + os.getCliente().getNome() + ", " + os.getAnimal().getNome() + "\n";
+	        	CharSequence osText = os.getId() + ", " + os.getAnimal().getCliente().getNome() + ", " + os.getAnimal().getNome() + "\n";
 	        	writer.append(osText);
 	        };
 	        
