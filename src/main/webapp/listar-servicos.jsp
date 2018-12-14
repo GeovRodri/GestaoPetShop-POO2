@@ -22,10 +22,10 @@
 			<tbody>
 				<c:forEach var="servico" items="${listServicos}" varStatus="id">
 					<tr>
-						<td>${servico.id}</td>
-						<td>${servico.tipo}</td>
-						<td>${servico.valor}</td>
-						<td>${servico.descricao}</td>
+						<td style="white-space:nowrap;">${servico.id}</td>
+						<td style="white-space:nowrap;">${servico.tipo}</td>
+						<td style="white-space:nowrap;">${servico.valor}</td>
+						<td style="white-space:nowrap;">${servico.descricao}</td>
 						
 						<td style="text-align: center;">
 							<a href="/servico/${servico.id}" style="color: blue;">

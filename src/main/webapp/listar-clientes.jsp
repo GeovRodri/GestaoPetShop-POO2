@@ -23,11 +23,11 @@
 			<tbody>
 				<c:forEach var="cliente" items="${listClientes}" varStatus="id">
 					<tr>
-						<td>${cliente.id}</td>
-						<td>${cliente.nome}</td>
-						<td>${cliente.cpf}</td>
-						<td>${cliente.endereco}</td>
-						<td>${cliente.telefone}</td>
+						<td style="white-space:nowrap;">${cliente.id}</td>
+						<td style="white-space:nowrap;">${cliente.nome}</td>
+						<td style="white-space:nowrap;">${cliente.cpf}</td>
+						<td style="white-space:nowrap;">${cliente.endereco}</td>
+						<td style="white-space:nowrap;">${cliente.telefone}</td>
 						
 						<td style="text-align: center;">
 							<a href="/cliente/${cliente.id}" style="color: blue;">

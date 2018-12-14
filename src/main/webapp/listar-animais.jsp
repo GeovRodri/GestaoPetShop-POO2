@@ -22,10 +22,10 @@
 			<tbody>
 				<c:forEach var="animal" items="${listAnimais}" varStatus="id">
 					<tr>
-						<td>${animal.id}</td>
-						<td>${animal.nome}</td>
-						<td>${animal.especie}</td>
-						<td>${animal.raca}</td>
+						<td style="white-space:nowrap;">${animal.id}</td>
+						<td style="white-space:nowrap;">${animal.nome}</td>
+						<td style="white-space:nowrap;">${animal.especie}</td>
+						<td style="white-space:nowrap;">${animal.raca}</td>
 						
 						<td style="text-align: center;">
 							<a href="/animal/${animal.id}" style="color: blue;">

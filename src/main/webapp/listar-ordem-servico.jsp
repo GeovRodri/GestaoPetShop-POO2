@@ -29,9 +29,9 @@
 			<tbody>
 				<c:forEach var="ordemServico" items="${listOrdemServico}" varStatus="id">
 					<tr>
-						<td>${ordemServico.id}</td>
-						<td>${ordemServico.cliente.nome}</td>
-						<td>${ordemServico.animal.nome}</td>
+						<td style="white-space:nowrap;">${ordemServico.id}</td>
+						<td style="white-space:nowrap;">${ordemServico.cliente.nome}</td>
+						<td style="white-space:nowrap;">${ordemServico.animal.nome}</td>
 						<td style="text-align: center;"><fmt:formatDate pattern = "dd/MM/yyyy" value="${ordemServico.dataServico}"/></td>
 						<td style="text-align: center;">
 							<a href="/ordem-servico/${ordemServico.id}" style="color: blue;">
