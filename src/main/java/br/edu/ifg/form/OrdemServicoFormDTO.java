@@ -28,6 +28,18 @@ public class OrdemServicoFormDTO implements Serializable {
 	@NotEmpty
 	private List<Integer> servicos;
 	
+    
+    private boolean recurringService;
+
+    
+	public boolean getRecurringService() {
+		return recurringService;
+	}
+
+	public void setRecurringService(boolean recurringService) {
+		this.recurringService = recurringService;
+	}
+	
 	public OrdemServicoFormDTO() {
 		super();
 	}

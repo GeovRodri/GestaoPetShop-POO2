@@ -36,12 +36,34 @@
 			</spring:bind>
 		
 			<spring:bind path="data">
-				<div class="col-md-4 form-group">
+				<div class="col-md-2 form-group">
 					<label class="control-label">Data</label> 
 					<form:input path="data" class="form-control ${status.error ? 'is-invalid' : ''}" type="date" />
 					<form:errors path="data" class="control-label" />
 				</div>
 			</spring:bind>
+			
+							
+				<div class="col-md-2 form-group">
+					<label class="control-label">Serviço Recorrente</label>					
+						<div class="custom-control custom-checkbox">
+						  <form:checkbox class="custom-control-input" path="recurringService" id="recurringService"/>
+						  <form:errors path="recurringService" class="control-label" />
+						  <label class="custom-control-label" for="recurringService"></label>
+						</div>
+				</div>
+					
+					
+				<!-- 
+				<div class="col-md-2 form-group">
+					<label class="control-label">Serviço Recorrente</label>					
+						<div class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input" id="recurringService">
+						  <label class="custom-control-label" for="recurringService"></label>
+						</div>
+				</div>
+				-->
+				
 		</div>
 		
 		<div class="row">
@@ -55,6 +77,7 @@
 			  	</div>
 			</spring:bind>
 		</div>
+		
 		
 		<div align="right">
 			<button type="submit" class="btn btn-primary">Salvar</button>

@@ -61,6 +61,18 @@ public class OrdemServico extends EntidadeBase {
     
     @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL)
     private List<ItemOrdemServico> itens = new ArrayList<>();
+    
+    @Column(name = "recurringService", nullable = false)
+    private boolean recurringService;
+
+    
+	public boolean getRecurringService() {
+		return recurringService;
+	}
+
+	public void setRecurringService(boolean recurringService) {
+		this.recurringService = recurringService;
+	}
 
 	public Integer getId() {
 		return id;

@@ -97,6 +97,7 @@ public class OrdemServicoController {
 			form.setClienteId(ordemServico.getCliente().getId());
 			form.setAnimalId(ordemServico.getAnimal().getId());
 			form.setData(ordemServico.getDataServico());
+			form.setRecurringService(ordemServico.getRecurringService());
 			
 			List<Integer> servicos = new ArrayList<>();
 			
@@ -157,6 +158,7 @@ public class OrdemServicoController {
 			
 			ordemServico.setDataCad(new Date());
 			ordemServico.setUsuarioCad(usuario);
+			ordemServico.setRecurringService(form.getRecurringService());
 			
 			if (form.getServicos() != null && !form.getServicos().isEmpty()) {
 				for (Integer servicoId : form.getServicos()) {
