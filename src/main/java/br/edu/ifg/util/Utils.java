@@ -25,6 +25,16 @@ public class Utils {
 		}
 	}
 
+	public static String dateToString(Date date) {
+		if (date == null)
+			return null;
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		sdf.setLenient(false);
+		sdf.applyPattern("dd/MM/yyyy");
+		return sdf.format(date);
+	}
+
+
 	public static String formatarValor(Double valor) {
 		NumberFormat fmt = NumberFormat.getInstance(new Locale("pt", "BR"));
 		fmt.setMinimumFractionDigits(2);

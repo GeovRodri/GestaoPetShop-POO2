@@ -30,9 +30,9 @@ public class OrdemServicoDAO extends GenericDao<OrdemServico, Integer> {
 		CriteriaQuery<OrdemServico> criteria = builder.createQuery(OrdemServico.class);
 		Root<OrdemServico> from = criteria.from(OrdemServico.class);
 		
-		FetchParent<OrdemServico, Cliente> fetchCliente = from.fetch("cliente");
 		FetchParent<OrdemServico, Animal> fetchAnimal = from.fetch("animal");
-		
+		FetchParent<OrdemServico, Cliente> fetchCliente = fetchAnimal.fetch("cliente");
+
 		FetchParent<OrdemServico, ItemOrdemServico> fetch = from.fetch("itens");
 		
 		TypedQuery<OrdemServico> typedQuery = entityManager.createQuery(criteria);
