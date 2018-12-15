@@ -156,7 +156,7 @@ public class OrdemServicoController {
 			populateDefaultModel(modelMap);
 			return "ordem-servico";
 		} else {
-			ordemServico.setItens(new ArrayList<>());
+			ordemServico.getItens().clear();
 			Animal animal = this.animalDAO.encontrar(form.getAnimalId());
 			Usuario usuario = this.usuarioDAO.encontrar(1);
 			

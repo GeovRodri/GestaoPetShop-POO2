@@ -42,7 +42,7 @@ public class Animal extends EntidadeBase {
 
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cliente_id", nullable = false, updatable = false)
+	@JoinColumn(name = "cliente_id", nullable = false)
 	private Cliente cliente;
 
 	@JsonIgnore

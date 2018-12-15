@@ -28,11 +28,11 @@ public class ItemOrdemServico extends EntidadeBase {
     private Integer id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_servico", nullable = false, updatable = false)
+    @JoinColumn(name = "id_servico", nullable = false)
     private Servico servico;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_os", nullable = false, updatable = false)
+    @JoinColumn(name = "id_os", nullable = false)
     private OrdemServico ordemServico;
 
     @Column(name = "dt_cad", nullable = false, updatable = false)

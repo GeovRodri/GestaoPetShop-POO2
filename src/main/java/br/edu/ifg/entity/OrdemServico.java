@@ -32,10 +32,10 @@ public class OrdemServico extends EntidadeBase {
     private Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_animal", nullable = false, updatable = false)
+    @JoinColumn(name = "id_animal", nullable = false)
     private Animal animal;
 	
-	@Column(name = "data_serv", nullable = false, updatable = false)
+	@Column(name = "data_serv", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataServico;
 
@@ -55,7 +55,7 @@ public class OrdemServico extends EntidadeBase {
     @JoinColumn(name = "user_alt", nullable = true, updatable = false)
     private Usuario usuarioAlt;
     
-    @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemOrdemServico> itens = new ArrayList<>();
     
     @Column(name = "recurringService", nullable = false)

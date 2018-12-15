@@ -19,6 +19,7 @@
     <script src="/assets/js/sb-admin.min.js"></script>
     <script src="/assets/vendor/easy-autocomplete/jquery.easy-autocomplete.min.js"></script>
     <script src="/assets/js/animal.js"></script>
+    <script src="/assets/js/ordem-servico.js"></script>
   </div>
 </body>
 
