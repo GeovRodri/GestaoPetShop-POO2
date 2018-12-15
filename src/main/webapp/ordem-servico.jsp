@@ -38,7 +38,7 @@
 			<spring:bind path="data">
 				<div class="col-md-2 form-group">
 					<label class="control-label">Data</label> 
-					<form:input path="data" class="form-control ${status.error ? 'is-invalid' : ''}" type="date" />
+					<form:input path="data" class="form-control ${status.error ? 'is-invalid' : ''}" type="date" id="datePicker"/>
 					<form:errors path="data" class="control-label" />
 				</div>
 			</spring:bind>
@@ -84,5 +84,9 @@
 		</div>
 	</form:form>
 </div>
+
+<script>
+	document.getElementById('datePicker').valueAsDate=new Date();
+</script>
 
 <%@ include file="../../footer.jsp"%>
