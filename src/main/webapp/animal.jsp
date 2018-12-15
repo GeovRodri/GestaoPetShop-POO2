@@ -27,7 +27,7 @@
 		<div class="row">
 			<spring:bind path="especie">
 				<div class="col-md-6 form-group">
-					<label class="control-label">Esp�cie</label>
+					<label class="control-label">Especie</label>
 					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="especie" />
 					<form:errors path="especie" class="control-label" />
 				</div>
@@ -35,7 +35,7 @@
 
 			<spring:bind path="raca">
 				<div class="col-md-6 form-group">
-					<label class="control-label">Ra�a</label> 
+					<label class="control-label">Raca</label>
 					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="raca" />
 					<form:errors path="raca" class="control-label" />
 				</div>

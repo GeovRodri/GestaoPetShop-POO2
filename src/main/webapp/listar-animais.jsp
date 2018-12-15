@@ -15,8 +15,8 @@
 					<th>Id</th>
 					<th>Nome</th>
 					<th>Cliente</th>
-					<th>Esp�cie</th>
-					<th>Ra�a</th>
+					<th>Especie</th>
+					<th>Raca</th>
 					<th></th>
 				</tr>
 			</thead>
