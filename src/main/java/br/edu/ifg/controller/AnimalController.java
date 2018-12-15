@@ -7,16 +7,15 @@ import javax.validation.Valid;
 
 import br.edu.ifg.dao.ClienteDAO;
 import br.edu.ifg.entity.Cliente;
+import br.edu.ifg.filters.AnimalFiltroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import br.edu.ifg.dao.AnimalDAO;
 import br.edu.ifg.dao.UsuarioDAO;
@@ -42,19 +41,27 @@ public class AnimalController {
 	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
-		binder.setValidator(animalFormValidator);
+		if (binder.getTarget() != null && AnimalFormDTO.class.equals(binder.getTarget().getClass())) {
+			binder.setValidator(animalFormValidator);
+		}
 	}
 
 	@RequestMapping(value = "/animal", method = RequestMethod.POST)
-	public String salvar(@ModelAttribute("animalForm") @Valid AnimalFormDTO form, BindingResult result, ModelMap modelMap) {		
+	public String salvar(@ModelAttribute("animalForm") @Valid AnimalFormDTO form, BindingResult result, ModelMap modelMap) {
 		Animal animal = new Animal();
 		return saveOrUpdate(form, result, modelMap, animal);
 	}
-	
+
+	@RequestMapping(value = "/filtrar-clientes", method = RequestMethod.POST)
+	public @ResponseBody ResponseEntity<List<Cliente>> filtrarClientes(@Valid AnimalFiltroDTO filtro) {
+		List<Cliente> clientes = this.clienteDAO.buscarPorNome(filtro.getCliente());
+		return new ResponseEntity<>(clientes, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/animal/{id}", method = RequestMethod.POST)
-	public String atualizar(@ModelAttribute("animalForm") @Valid AnimalFormDTO form, @PathVariable("id") Integer id, 
+	public String atualizar(@ModelAttribute("animalForm") @Valid AnimalFormDTO form, @PathVariable("id") Integer id,
 			BindingResult result, ModelMap modelMap) {
-		
+
 		Animal animal = this.animalDAO.encontrar(id);
 		return saveOrUpdate(form, result, modelMap, animal);
 	}
@@ -78,6 +85,7 @@ public class AnimalController {
 			form.setNome(animal.getNome());
 			form.setRaca(animal.getRaca());
 			form.setEspecie(animal.getEspecie());
+			form.setCliente(animal.getCliente().getNome());
 		}
 		
 		return "animal";
@@ -100,7 +108,7 @@ public class AnimalController {
 			return "animal";
 		} else {
 			Usuario usuario = this.usuarioDAO.encontrar(1);
-			Cliente cliente = this.clienteDAO.encontrar(form.getCliente());
+			Cliente cliente = this.clienteDAO.buscarPorNome(form.getCliente()).get(0);
 			
 			// Preenchendo entidade
 			animal.setNome(form.getNome());

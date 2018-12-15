@@ -14,8 +14,9 @@
 				<tr>
 					<th>Id</th>
 					<th>Nome</th>
-					<th>Espécie</th>
-					<th>Raça</th>
+					<th>Cliente</th>
+					<th>Espï¿½cie</th>
+					<th>Raï¿½a</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -24,6 +25,7 @@
 					<tr>
 						<td style="white-space:nowrap;">${animal.id}</td>
 						<td style="white-space:nowrap;">${animal.nome}</td>
+						<td style="white-space:nowrap;">${animal.cliente.nome}</td>
 						<td style="white-space:nowrap;">${animal.especie}</td>
 						<td style="white-space:nowrap;">${animal.raca}</td>
 						

@@ -7,29 +7,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Gestão de PetShop</title>
+  <title>Gestï¿½o de PetShop</title>
   <!-- Bootstrap core CSS-->
   <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
   <!-- Custom styles for this template-->
   <link href="/assets/css/sb-admin.css" rel="stylesheet">
+  <link href="/assets/vendor/easy-autocomplete/easy-autocomplete.min.css" rel="stylesheet">
+  <link href="/assets/vendor/easy-autocomplete/easy-autocomplete.themes.min.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.jsp">Gestão de PetShop</a>
+    <a class="navbar-brand" href="index.jsp">Gestï¿½o de PetShop</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ordem de Serviço">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ordem de Serviï¿½o">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseOrdemServico" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-angle-right"></i>
-            <span class="nav-link-text">Ordem de Serviço</span>
+            <span class="nav-link-text">Ordem de Serviï¿½o</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseOrdemServico">
             <li>
@@ -75,7 +77,7 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ServiÃ§o">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseServico" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-angle-right"></i>
-            <span class="nav-link-text">Serviço</span>
+            <span class="nav-link-text">Serviï¿½o</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseServico">
             <li>

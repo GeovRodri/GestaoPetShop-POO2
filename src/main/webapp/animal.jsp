@@ -15,19 +15,27 @@
 				</div>
 			</spring:bind>
 			
-			<spring:bind path="especie">
+			<spring:bind path="cliente">
 				<div class="col-md-6 form-group">
-					<label class="control-label">Espécie</label> 
-					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="especie" />
-					<form:errors path="especie" class="control-label" />
+					<label class="control-label">Cliente</label>
+					<form:input id="clienteInput" type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="cliente" />
+					<form:errors path="cliente" class="control-label" />
 				</div>
 			</spring:bind>
 		</div>
 		
-		<div class="row">	
+		<div class="row">
+			<spring:bind path="especie">
+				<div class="col-md-6 form-group">
+					<label class="control-label">Espï¿½cie</label>
+					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="especie" />
+					<form:errors path="especie" class="control-label" />
+				</div>
+			</spring:bind>
+
 			<spring:bind path="raca">
 				<div class="col-md-6 form-group">
-					<label class="control-label">Raça</label> 
+					<label class="control-label">Raï¿½a</label> 
 					<form:input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="raca" />
 					<form:errors path="raca" class="control-label" />
 				</div>

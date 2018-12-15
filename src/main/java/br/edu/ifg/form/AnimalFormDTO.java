@@ -19,7 +19,7 @@ public class AnimalFormDTO implements Serializable {
 	private String raca;
 
 	@NotNull
-	private Integer cliente;
+	private String cliente;
 		
 	public AnimalFormDTO() {
 		super();
@@ -58,11 +58,11 @@ public class AnimalFormDTO implements Serializable {
 		this.raca = raca;
 	}
 
-	public Integer getCliente() {
+	public String getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Integer cliente) {
+	public void setCliente(String cliente) {
 		this.cliente = cliente;
 	}
 }

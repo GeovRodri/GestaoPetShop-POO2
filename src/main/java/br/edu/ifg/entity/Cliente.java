@@ -32,6 +32,7 @@ public class Cliente extends EntidadeBase {
     @Column(name = "endereco", nullable = true)
     private String endereco;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Animal> animais = new ArrayList<>();
 
@@ -39,6 +40,7 @@ public class Cliente extends EntidadeBase {
     @Temporal(TemporalType.DATE)
     private Date dataCad;
 
+	@JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_cad", nullable = false, updatable = false)
     private Usuario usuarioCad;
@@ -47,6 +49,7 @@ public class Cliente extends EntidadeBase {
     @Temporal(TemporalType.DATE)
     private Date dataAlt;
 
+	@JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_alt", nullable = true, updatable = false)
     private Usuario usuarioAlt;

@@ -1,7 +1,7 @@
 	<footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+          <small>Copyright ï¿½ Your Website 2018</small>
         </div>
       </div>
     </footer>
@@ -17,6 +17,8 @@
     <script src="/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="/assets/js/sb-admin.min.js"></script>
+    <script src="/assets/vendor/easy-autocomplete/jquery.easy-autocomplete.min.js"></script>
+    <script src="/assets/js/animal.js"></script>
   </div>
 </body>
 
