@@ -1,10 +1,7 @@
 package br.edu.ifg.controller;
 
-import java.util.Date;
 import java.util.List;
-
 import javax.validation.Valid;
-
 import br.edu.ifg.dao.ClienteDAO;
 import br.edu.ifg.entity.Cliente;
 import br.edu.ifg.filters.AnimalFiltroDTO;
@@ -16,11 +13,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
 import br.edu.ifg.dao.AnimalDAO;
-import br.edu.ifg.dao.UsuarioDAO;
 import br.edu.ifg.entity.Animal;
-import br.edu.ifg.entity.Usuario;
 import br.edu.ifg.form.AnimalFormDTO;
 import br.edu.ifg.validator.AnimalFormValidator;
 
@@ -29,9 +23,6 @@ public class AnimalController {
 
 	@Autowired
 	private AnimalDAO animalDAO;
-
-	@Autowired
-	private UsuarioDAO usuarioDAO;
 
 	@Autowired
 	private ClienteDAO clienteDAO;
@@ -107,7 +98,6 @@ public class AnimalController {
 		if (result.hasErrors()) {
 			return "animal";
 		} else {
-			Usuario usuario = this.usuarioDAO.encontrar(1);
 			Cliente cliente = this.clienteDAO.buscarPorNome(form.getCliente()).get(0);
 			
 			// Preenchendo entidade
@@ -115,10 +105,6 @@ public class AnimalController {
 			animal.setRaca(form.getRaca());
 			animal.setEspecie(form.getEspecie());
 			animal.setCliente(cliente);
-			
-			// Setando informações para log
-			animal.setDataCad(new Date());
-			animal.setUsuarioCad(usuario);
 			
 			if (animal.getId() != null) {
 				animal = animalDAO.atualizar(animal);

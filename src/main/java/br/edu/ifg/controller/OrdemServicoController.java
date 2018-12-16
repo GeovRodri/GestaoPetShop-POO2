@@ -1,11 +1,12 @@
 package br.edu.ifg.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import br.edu.ifg.filters.AnimalFiltroDTO;
+import br.edu.ifg.filters.OrdemServicoFiltroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -20,15 +21,12 @@ import br.edu.ifg.dao.AnimalDAO;
 import br.edu.ifg.dao.ClienteDAO;
 import br.edu.ifg.dao.OrdemServicoDAO;
 import br.edu.ifg.dao.ServicoDAO;
-import br.edu.ifg.dao.UsuarioDAO;
 import br.edu.ifg.entity.Animal;
 import br.edu.ifg.entity.Cliente;
 import br.edu.ifg.entity.ItemOrdemServico;
 import br.edu.ifg.entity.OrdemServico;
 import br.edu.ifg.entity.Servico;
 import br.edu.ifg.entity.Usuario;
-import br.edu.ifg.filters.AnimalFiltroDTO;
-import br.edu.ifg.filters.OrdemServicoFiltroDTO;
 import br.edu.ifg.form.OrdemServicoFormDTO;
 import br.edu.ifg.thread.GenerateCsvFile;
 import br.edu.ifg.validator.OrdemServicoFormValidator;
@@ -49,9 +47,6 @@ public class OrdemServicoController {
 	private ServicoDAO servicoDAO;
 	
 	@Autowired
-	private UsuarioDAO usuarioDAO;
-	
-	@Autowired
 	private ApplicationContext applicationContext;
 	
 	@Autowired
@@ -59,7 +54,9 @@ public class OrdemServicoController {
 	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
-		binder.setValidator(ordemServicoFormValidator);
+        if (binder.getTarget() != null && OrdemServicoFormDTO.class.equals(binder.getTarget().getClass())) {
+            binder.setValidator(ordemServicoFormValidator);
+        }
 	}
 
 	@RequestMapping(value = "/ordem-servico", method = RequestMethod.POST)
@@ -73,13 +70,13 @@ public class OrdemServicoController {
 		List<Cliente> clientes = this.clienteDAO.buscarPorNome(filtro.getCliente());
 		return new ResponseEntity<>(clientes, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/filtrar-animais-no-Ordem-Servico", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<List<Animal>> filtrarAnimais(@Valid OrdemServicoFiltroDTO filtro) {
 		List<Animal> animais = this.animalDAO.buscarPorNome(filtro.getAnimal());
 		return new ResponseEntity<>(animais, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/ordem-servico/{id}", method = RequestMethod.POST)
 	public String atualizar(@ModelAttribute("ordemServicoForm") @Valid OrdemServicoFormDTO form, @PathVariable("id") Integer id, 
 			BindingResult result, ModelMap modelMap) {
@@ -171,15 +168,10 @@ public class OrdemServicoController {
 			return "ordem-servico";
 		} else {
 			ordemServico.getItens().clear();
-			Usuario usuario = this.usuarioDAO.encontrar(1);
-			Cliente cliente = this.clienteDAO.buscarPorNome(form.getCliente()).get(0);
 			Animal animal = this.animalDAO.buscarPorNome(form.getCliente()).get(0);
 			
 			ordemServico.setAnimal(animal);
 			ordemServico.setDataServico(form.getData());
-			
-			ordemServico.setDataCad(new Date());
-			ordemServico.setUsuarioCad(usuario);
 			ordemServico.setRecurringService(form.getRecurringService());
 			
 			if (form.getServicos() != null && !form.getServicos().isEmpty()) {
@@ -188,11 +180,7 @@ public class OrdemServicoController {
 					
 					Servico servico = this.servicoDAO.encontrar(servicoId);
 					item.setServico(servico);
-					
-					item.setOrdemServico(ordemServico);	
-					item.setDataCad(new Date());
-					item.setUsuarioCad(usuario); 
-					
+					item.setOrdemServico(ordemServico);
 					ordemServico.getItens().add(item);
 				}
 			}

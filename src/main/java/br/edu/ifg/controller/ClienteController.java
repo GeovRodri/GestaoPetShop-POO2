@@ -1,7 +1,5 @@
 package br.edu.ifg.controller;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.edu.ifg.dao.ClienteDAO;
-import br.edu.ifg.dao.UsuarioDAO;
 import br.edu.ifg.entity.Cliente;
 import br.edu.ifg.entity.Usuario;
 import br.edu.ifg.form.ClienteFormDTO;
@@ -30,9 +27,6 @@ public class ClienteController extends Thread{
 	
 	@Autowired
 	private ClienteDAO clienteDAO;
-
-	@Autowired
-	private UsuarioDAO usuarioDAO;
 	
 	@Autowired
 	ClienteFormValidator clienteFormValidator;
@@ -98,19 +92,12 @@ public class ClienteController extends Thread{
 		if (result.hasErrors()) {
 			return "cliente";
 		} else {
-			Usuario usuario = this.usuarioDAO.encontrar(1);
-			
 			// Preenchendo entidade
 			cliente.setNome(form.getNome());
 			cliente.setCpf(form.getCpf());
 			cliente.setEndereco(form.getEndereco());
 			cliente.setTelefone(form.getTelefone());
-			//cliente.setDataCad(form.getDataCad());
-			
-			// Setando informações para log
-			cliente.setDataCad(new Date());
-			cliente.setUsuarioCad(usuario);
-			
+
 			if (cliente.getId() != null) {
 				cliente = clienteDAO.atualizar(cliente);
 			} else {
@@ -123,7 +110,4 @@ public class ClienteController extends Thread{
 			return "listar-clientes";
 		}
 	}
-	
-	
-	
 }

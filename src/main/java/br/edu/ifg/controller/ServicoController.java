@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.edu.ifg.dao.ServicoDAO;
-import br.edu.ifg.dao.UsuarioDAO;
 import br.edu.ifg.entity.Servico;
 import br.edu.ifg.entity.Usuario;
 import br.edu.ifg.form.ServicoFormDTO;
@@ -28,9 +27,6 @@ public class ServicoController {
 
 	@Autowired
 	private ServicoDAO servicoDAO;
-
-	@Autowired
-	private UsuarioDAO usuarioDAO;
 	
 	@Autowired
 	ServicoFormValidator servicoFormValidator;
@@ -94,16 +90,10 @@ public class ServicoController {
 		if (result.hasErrors()) {
 			return "servico";
 		} else {
-			Usuario usuario = this.usuarioDAO.encontrar(1);
-			
 			// Preenchendo entidade
 			servico.setTipo(form.getTipo());
 			servico.setValor(form.getValor());
 			servico.setDescricao(form.getDescricao());
-			
-			// Setando informações para log
-			servico.setDataCad(new Date());
-			servico.setUsuarioCad(usuario);
 			
 			if (servico.getId() != null) {
 				servico = servicoDAO.atualizar(servico);

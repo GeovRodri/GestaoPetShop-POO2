@@ -43,12 +43,12 @@ public class ItemOrdemServico extends EntidadeBase {
     @JoinColumn(name = "user_cad", nullable = false, updatable = false)
     private Usuario usuarioCad;
     
-    @Column(name = "dt_alt", nullable = true, updatable = false)
+    @Column(name = "dt_alt", nullable = true)
     @Temporal(TemporalType.DATE)
     private Date dataAlt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_alt", nullable = true, updatable = false)
+    @JoinColumn(name = "user_alt", nullable = true)
     private Usuario usuarioAlt;
 
 	public Integer getId() {
