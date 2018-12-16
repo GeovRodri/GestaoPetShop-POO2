@@ -1,12 +1,16 @@
 package br.edu.ifg.controller;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import br.edu.ifg.filters.AnimalFiltroDTO;
 import br.edu.ifg.filters.OrdemServicoFiltroDTO;
+import br.edu.ifg.util.Utils;
+import com.opencsv.CSVWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -26,9 +30,7 @@ import br.edu.ifg.entity.Cliente;
 import br.edu.ifg.entity.ItemOrdemServico;
 import br.edu.ifg.entity.OrdemServico;
 import br.edu.ifg.entity.Servico;
-import br.edu.ifg.entity.Usuario;
 import br.edu.ifg.form.OrdemServicoFormDTO;
-import br.edu.ifg.thread.GenerateCsvFile;
 import br.edu.ifg.validator.OrdemServicoFormValidator;
 
 @Controller
@@ -148,18 +150,39 @@ public class OrdemServicoController {
 	}
 	
 	@RequestMapping(value = "/listar-ordem-servico/gerar", method = RequestMethod.GET)
-	public String listarCSV(ModelMap model) { 
-		
-		// Inicializando thread para a geração dos csv
-		GenerateCsvFile thread = new GenerateCsvFile();
-		applicationContext.getAutowireCapableBeanFactory().autowireBean(thread); // adicionando ao contexto do spring
-		thread.start();
-		
-		// Retornando para a tela com a mensagem de geração do csv
-		List<OrdemServico> listOrdemServico = this.ordemServicoDAO.getList();
-		model.addAttribute("listOrdemServico", listOrdemServico);
-		model.addAttribute("successMsg", "Gerando relatório CSV");
-		return "listar-ordem-servico";
+	public @ResponseBody void listarCSV(HttpServletResponse response) {
+		List<OrdemServico> listarOS = ordemServicoDAO.listarComFatch();
+		String sFileName = "ordens_de_servico.csv";
+
+		// Setando os headers
+		response.setContentType("text/csv;charset=utf-8");
+		response.setHeader("Content-Disposition","attachment; filename=\"" + sFileName + ".csv\"");
+		response.setHeader("Transfer-Encoding", "Chunked");
+		response.setHeader("Content-Description", "File Transfer");
+
+		try {
+			OutputStream resOs = response.getOutputStream();
+			OutputStream buffOs = new BufferedOutputStream(resOs);
+			OutputStreamWriter outputWriter = new OutputStreamWriter(buffOs,"UTF-8");
+			CSVWriter writer = new CSVWriter(outputWriter);
+
+			writer.writeNext("Id,Cliente,Animal,Data".split(","));
+			for (int i = 0; i < listarOS.size(); i++) {
+				OrdemServico os = listarOS.get(i);
+				String[] item = new String[4];
+				item[0] = os.getId().toString();
+				item[1] = os.getAnimal().getCliente().getNome();
+				item[2] = os.getAnimal().getNome();
+				item[3] = Utils.dateToString(os.getDataCad());
+
+				writer.writeNext(item);
+			}
+
+			writer.flush();
+			writer.close();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 	
 	private String saveOrUpdate(OrdemServicoFormDTO form, BindingResult result, ModelMap modelMap, OrdemServico ordemServico) {

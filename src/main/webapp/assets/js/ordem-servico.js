@@ -21,6 +21,23 @@ var buscarAnimais = function (cliente) {
     });
 };
 
+var gerarCsv = function () {
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "/listar-ordem-servico/gerar",
+        success: function (results) {
+            var a = $("<a />", {
+                href: "data:text/csv,"
+                    + URL.createObjectURL(new Blob([data], {
+                        type:"text/csv"
+                    })),
+                "download":"ordem-de-servico.csv"
+            });
+        }
+    });
+};
+
 (function($) {
     "use strict"; // Start of use strict
 
