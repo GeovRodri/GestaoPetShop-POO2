@@ -63,19 +63,6 @@ public class OrdemServico extends EntidadeBase {
     @Column(name = "recurringService", nullable = false)
     private boolean recurringService;
     
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cliente_id", nullable = false)
-	private Cliente cliente;
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-    
 	public boolean getRecurringService() {
 		return recurringService;
 	}
