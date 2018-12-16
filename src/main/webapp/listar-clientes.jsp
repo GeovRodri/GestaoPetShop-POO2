@@ -8,6 +8,11 @@
 		</div>
 	</c:if>
 
+	<div align="right">
+		<a type="button" href=/listar-clientes/gerar
+		   name="listarCSV" class="btn btn-primary">Gerar CSV</a>
+	</div>
+
 	<div class="table-responsive">
 		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 			<thead>
@@ -15,7 +20,7 @@
 					<th>Id</th>
 					<th>Nome</th>
 					<th>CPF</th>
-					<th>Endereço</th>
+					<th>Endereï¿½o</th>
 					<th>Telefone</th>
 					<th></th>
 				</tr>

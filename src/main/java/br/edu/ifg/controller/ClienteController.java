@@ -1,20 +1,24 @@
 package br.edu.ifg.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import br.edu.ifg.entity.Animal;
+import br.edu.ifg.util.Utils;
+import com.opencsv.CSVWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import br.edu.ifg.dao.ClienteDAO;
 import br.edu.ifg.entity.Cliente;
@@ -108,6 +112,44 @@ public class ClienteController extends Thread{
 			modelMap.addAttribute("listClientes", listClientes);
 			modelMap.addAttribute("successMsg", "Cliente salvo com sucesso!");
 			return "listar-clientes";
+		}
+	}
+
+	@RequestMapping(value = "/listar-clientes/gerar", method = RequestMethod.GET)
+	public @ResponseBody
+	void listarCSV(HttpServletResponse response) {
+		List<Cliente> clientes = this.clienteDAO.getList();
+		String sFileName = "listagem_de_clientes.csv";
+
+		// Setando os headers
+		response.setContentType("text/csv;charset=utf-8");
+		response.setHeader("Content-Disposition","attachment; filename=\"" + sFileName + ".csv\"");
+		response.setHeader("Transfer-Encoding", "Chunked");
+		response.setHeader("Content-Description", "File Transfer");
+
+		try {
+			OutputStream resOs = response.getOutputStream();
+			OutputStream buffOs = new BufferedOutputStream(resOs);
+			OutputStreamWriter outputWriter = new OutputStreamWriter(buffOs,"UTF-8");
+			CSVWriter writer = new CSVWriter(outputWriter);
+
+			writer.writeNext("Id,Nome,CPF,Endereço,Telefone".split(","));
+			for (int i = 0; i < clientes.size(); i++) {
+				Cliente cliente = clientes.get(i);
+				String[] item = new String[5];
+				item[0] = cliente.getId().toString();
+				item[1] = cliente.getNome();
+				item[2] = cliente.getCpf();
+				item[3] = cliente.getEndereco();
+				item[4] = cliente.getTelefone();
+
+				writer.writeNext(item);
+			}
+
+			writer.flush();
+			writer.close();
+		}catch(IOException e){
+			e.printStackTrace();
 		}
 	}
 }
