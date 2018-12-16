@@ -16,6 +16,12 @@ public class OrdemServicoFormDTO implements Serializable {
 	private Integer id;
 	
 	@NotNull
+	private String cliente;
+	
+	@NotNull
+	private String animal;
+	
+	@NotNull
 	private Integer clienteId;
 	
 	@NotNull
@@ -60,6 +66,10 @@ public class OrdemServicoFormDTO implements Serializable {
 		this.clienteId = clienteId;
 	}
 
+	public void setAnimal(String animal) {
+		this.animal = animal;
+	}
+	
 	public Integer getAnimalId() {
 		return animalId;
 	}
@@ -82,5 +92,15 @@ public class OrdemServicoFormDTO implements Serializable {
 
 	public void setServicos(List<Integer> servicos) {
 		this.servicos = servicos;
+	}
+
+	public String getCliente() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public String getAnimal() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

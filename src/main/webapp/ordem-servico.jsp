@@ -12,12 +12,7 @@
 			<spring:bind path="clienteId">
 				<div class="col-md-4 form-group">
 					<label class="control-label">Cliente</label>
-					<form:select path="clienteId" class="form-control ${status.error ? 'is-invalid' : ''}" onchange="buscarAnimais(this.value)">
-						<form:option value="">Selecione um cliente</form:option>
-						<c:forEach var="cliente" items="${clientes}">
-							<form:option value="${cliente.id}">${cliente.nome}</form:option>
-				        </c:forEach>
-					</form:select>
+					<form:input id="clienteInput" type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="clienteId" />
 					<form:errors path="clienteId" class="control-label" />
 				</div>
 			</spring:bind>
@@ -25,12 +20,7 @@
 			<spring:bind path="animalId">
 				<div class="col-md-4 form-group">
 					<label class="control-label">Animal</label>
-					<form:select path="animalId" class="form-control ${status.error ? 'is-invalid' : ''}" id="selectAnimal">
-						<form:option value="">Selecione um Animal</form:option>
-						<c:forEach var="animal" items="${animais}" varStatus="id">
-							<form:option value="${animal.id}">${animal.nome}</form:option>
-				        </c:forEach>
-					</form:select>
+					<form:input id="animalInput" type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="animalId"/>
 					<form:errors path="animalId" class="control-label" />
 				</div>
 			</spring:bind>
@@ -46,11 +36,11 @@
 							
 				<div class="col-md-2 form-group">
 					<label class="control-label">Servico Recorrente</label>
-						<div class="custom-control custom-checkbox">
-						  <form:checkbox class="custom-control-input" path="recurringService" id="recurringService"/>
-						  <form:errors path="recurringService" class="control-label" />
-						  <label class="custom-control-label" for="recurringService"></label>
-						</div>
+					  <div class="custom-control custom-checkbox">
+					  	<form:checkbox class="custom-control-input" path="recurringService" id="recurringService"/>
+					  	<form:errors path="recurringService" class="control-label" />
+					  	<label class="custom-control-label" for="recurringService"></label>
+					</div>
 				</div>
 		</div>
 		

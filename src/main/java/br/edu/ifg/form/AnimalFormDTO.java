@@ -23,7 +23,6 @@ public class AnimalFormDTO implements Serializable {
 		
 	public AnimalFormDTO() {
 		super();
-		
 	}
 
 	public Integer getId() {

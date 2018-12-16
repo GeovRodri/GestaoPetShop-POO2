@@ -27,6 +27,8 @@ import br.edu.ifg.entity.ItemOrdemServico;
 import br.edu.ifg.entity.OrdemServico;
 import br.edu.ifg.entity.Servico;
 import br.edu.ifg.entity.Usuario;
+import br.edu.ifg.filters.AnimalFiltroDTO;
+import br.edu.ifg.filters.OrdemServicoFiltroDTO;
 import br.edu.ifg.form.OrdemServicoFormDTO;
 import br.edu.ifg.thread.GenerateCsvFile;
 import br.edu.ifg.validator.OrdemServicoFormValidator;
@@ -64,6 +66,18 @@ public class OrdemServicoController {
 	public String salvar(@ModelAttribute("ordemServicoForm") @Valid OrdemServicoFormDTO form, BindingResult result, ModelMap modelMap) {		
 		OrdemServico ordemServico = new OrdemServico();
 		return saveOrUpdate(form, result, modelMap, ordemServico);
+	}
+	
+	@RequestMapping(value = "/filtrar-clientes-no-Ordem-Servico", method = RequestMethod.POST)
+	public @ResponseBody ResponseEntity<List<Cliente>> filtrarClientes(@Valid AnimalFiltroDTO filtro) {
+		List<Cliente> clientes = this.clienteDAO.buscarPorNome(filtro.getCliente());
+		return new ResponseEntity<>(clientes, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/filtrar-animais-no-Ordem-Servico", method = RequestMethod.POST)
+	public @ResponseBody ResponseEntity<List<Animal>> filtrarAnimais(@Valid OrdemServicoFiltroDTO filtro) {
+		List<Animal> animais = this.animalDAO.buscarPorNome(filtro.getAnimal());
+		return new ResponseEntity<>(animais, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/ordem-servico/{id}", method = RequestMethod.POST)
@@ -157,8 +171,9 @@ public class OrdemServicoController {
 			return "ordem-servico";
 		} else {
 			ordemServico.getItens().clear();
-			Animal animal = this.animalDAO.encontrar(form.getAnimalId());
 			Usuario usuario = this.usuarioDAO.encontrar(1);
+			Cliente cliente = this.clienteDAO.buscarPorNome(form.getCliente()).get(0);
+			Animal animal = this.animalDAO.buscarPorNome(form.getCliente()).get(0);
 			
 			ordemServico.setAnimal(animal);
 			ordemServico.setDataServico(form.getData());
