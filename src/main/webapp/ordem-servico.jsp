@@ -9,19 +9,19 @@
 	<form:form method="post" modelAttribute="ordemServicoForm" action="/ordem-servico/${id != null ? id: ''}">
 		
 		<div class="row">
-			<spring:bind path="clienteId">
+			<spring:bind path="cliente">
 				<div class="col-md-4 form-group">
 					<label class="control-label">Cliente</label>
-					<form:input id="clienteInput" type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="clienteId" />
-					<form:errors path="clienteId" class="control-label" />
+					<form:input id="clienteInput" type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="cliente" />
+					<form:errors path="cliente" class="control-label" />
 				</div>
 			</spring:bind>
 			
-			<spring:bind path="animalId">
+			<spring:bind path="animal">
 				<div class="col-md-4 form-group">
 					<label class="control-label">Animal</label>
-					<form:input id="animalInput" type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="animalId"/>
-					<form:errors path="animalId" class="control-label" />
+					<form:input id="animalInput" type="text" class="form-control ${status.error ? 'is-invalid' : ''}" path="animal"/>
+					<form:errors path="animal" class="control-label" />
 				</div>
 			</spring:bind>
 		
@@ -62,9 +62,5 @@
 		</div>
 	</form:form>
 </div>
-
-<script>
-	document.getElementById('datePicker').valueAsDate=new Date();
-</script>
 
 <%@ include file="../../footer.jsp"%>

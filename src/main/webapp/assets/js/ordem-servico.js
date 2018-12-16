@@ -1,28 +1,6 @@
-var buscarAnimais = function (cliente) {
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: "/buscar-animais-cliente/" + cliente,
-        success: function (results) {
-            $('#selectAnimal').empty();
-            var sel = document.getElementById("selectAnimal");
-
-            results.forEach(function (result, index) {
-                var opt = document.createElement("option");
-                opt.value = result.id;
-                opt.text = result.nome;
-
-                sel.add(opt, null);
-                if (index === 0) {
-                    sel.value = result.id;
-                }
-            });
-        }
-    });
-};
-
 (function($) {
     "use strict"; // Start of use strict
+    document.getElementById('datePicker').valueAsDate=new Date();
 
     var options = {
 
@@ -43,7 +21,8 @@ var buscarAnimais = function (cliente) {
         },
 
         preparePostData: function(data) {
-            data.cliente = $("#animalInput").val();
+            data.cliente = $("#clienteInput").val();
+            data.animal = $("#animalInput").val();
             return data;
         },
 
@@ -51,5 +30,33 @@ var buscarAnimais = function (cliente) {
     };
 
     $("#animalInput").easyAutocomplete(options);
+
+    var optionsClientes = {
+
+        url: function(phrase) {
+            return "/filtrar-clientes-no-Ordem-Servico";
+        },
+
+        getValue: function(element) {
+            return element.nome;
+        },
+
+        ajaxSettings: {
+            dataType: "json",
+            method: "POST",
+            data: {
+                dataType: "json"
+            }
+        },
+
+        preparePostData: function(data) {
+            data.cliente = $("#clienteInput").val();
+            return data;
+        },
+
+        requestDelay: 400
+    };
+
+    $("#clienteInput").easyAutocomplete(optionsClientes);
 
 })(jQuery); // End of use strict

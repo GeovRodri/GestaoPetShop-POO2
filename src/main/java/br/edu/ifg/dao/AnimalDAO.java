@@ -18,16 +18,18 @@ public class AnimalDAO extends GenericDao<Animal, Integer> {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Animal> buscarPorNome(String nome) {
+	public List<Animal> buscarPorNome(String nome, String cliente) {
 		try {
 			StringBuffer strb = new StringBuffer();
 
 			strb.append("SELECT animal FROM Animal animal");
 			strb.append(" WHERE LOWER(animal.nome) like :nome");
+			strb.append("   AND LOWER(animal.cliente.nome) like :nomeCliente");
 
 			Query query = getEntityManager().createQuery(strb.toString());
 			query.setMaxResults(5);
 			query.setParameter("nome", nome.toLowerCase() + "%");
+			query.setParameter("nomeCliente", cliente.toLowerCase());
 
 			@SuppressWarnings("unchecked")
 			List<Animal> lst = query.getResultList();

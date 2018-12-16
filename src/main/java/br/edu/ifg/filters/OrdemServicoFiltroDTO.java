@@ -8,6 +8,9 @@ public class OrdemServicoFiltroDTO implements Serializable {
 	@NotNull
 	private String animal;
 
+	@NotNull
+	private String cliente;
+
 	public OrdemServicoFiltroDTO() {
 		super();
 	}
@@ -18,5 +21,13 @@ public class OrdemServicoFiltroDTO implements Serializable {
 
 	public void setAnimal(String animal) {
 		this.animal = animal;
+	}
+
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
 	}
 }

@@ -21,20 +21,13 @@ public class OrdemServicoFormDTO implements Serializable {
 	@NotNull
 	private String animal;
 	
-	@NotNull
-	private Integer clienteId;
-	
-	@NotNull
-	private Integer animalId;
-	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data;
 	
 	@NotNull
 	@NotEmpty
 	private List<Integer> servicos;
-	
-    
+
     private boolean recurringService;
 
     
@@ -58,24 +51,8 @@ public class OrdemServicoFormDTO implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getClienteId() {
-		return clienteId;
-	}
-
-	public void setClienteId(Integer clienteId) {
-		this.clienteId = clienteId;
-	}
-
 	public void setAnimal(String animal) {
 		this.animal = animal;
-	}
-	
-	public Integer getAnimalId() {
-		return animalId;
-	}
-
-	public void setAnimalId(Integer animalId) {
-		this.animalId = animalId;
 	}
 
 	public Date getData() {
@@ -95,12 +72,18 @@ public class OrdemServicoFormDTO implements Serializable {
 	}
 
 	public String getCliente() {
-		// TODO Auto-generated method stub
-		return null;
+		return cliente;
 	}
-	
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
+	}
+
 	public String getAnimal() {
-		// TODO Auto-generated method stub
-		return null;
+		return animal;
+	}
+
+	public boolean isRecurringService() {
+		return recurringService;
 	}
 }

@@ -12,7 +12,6 @@ import br.edu.ifg.filters.OrdemServicoFiltroDTO;
 import br.edu.ifg.util.Utils;
 import com.opencsv.CSVWriter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -47,10 +46,7 @@ public class OrdemServicoController {
 
 	@Autowired
 	private ServicoDAO servicoDAO;
-	
-	@Autowired
-	private ApplicationContext applicationContext;
-	
+
 	@Autowired
 	OrdemServicoFormValidator ordemServicoFormValidator;
 	
@@ -75,7 +71,7 @@ public class OrdemServicoController {
 
 	@RequestMapping(value = "/filtrar-animais-no-Ordem-Servico", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<List<Animal>> filtrarAnimais(@Valid OrdemServicoFiltroDTO filtro) {
-		List<Animal> animais = this.animalDAO.buscarPorNome(filtro.getAnimal());
+		List<Animal> animais = this.animalDAO.buscarPorNome(filtro.getAnimal(), filtro.getCliente());
 		return new ResponseEntity<>(animais, HttpStatus.OK);
 	}
 
@@ -105,8 +101,8 @@ public class OrdemServicoController {
 		
 		if (ordemServico != null) {
 			form.setId(ordemServico.getId());
-			form.setClienteId(ordemServico.getAnimal().getCliente().getId());
-			form.setAnimalId(ordemServico.getAnimal().getId());
+			form.setCliente(ordemServico.getAnimal().getCliente().getNome());
+			form.setAnimal(ordemServico.getAnimal().getNome());
 			form.setData(ordemServico.getDataServico());
 			form.setRecurringService(ordemServico.getRecurringService());
 			
@@ -191,7 +187,7 @@ public class OrdemServicoController {
 			return "ordem-servico";
 		} else {
 			ordemServico.getItens().clear();
-			Animal animal = this.animalDAO.buscarPorNome(form.getCliente()).get(0);
+			Animal animal = this.animalDAO.buscarPorNome(form.getAnimal(), form.getCliente()).get(0);
 			
 			ordemServico.setAnimal(animal);
 			ordemServico.setDataServico(form.getData());

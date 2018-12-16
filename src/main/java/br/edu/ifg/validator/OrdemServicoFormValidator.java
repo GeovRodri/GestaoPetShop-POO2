@@ -32,14 +32,18 @@ public class OrdemServicoFormValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		OrdemServicoFormDTO form = (OrdemServicoFormDTO) target;
 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "clienteId", "required.clienteId", "Selecione um cliente para continuar");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "animalId", "required.animalId", "Selecione um animal para continuar");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "data", "required.data", "Preencha uma data");
 		
-		List<Cliente> clientes = this.clienteDAO.buscarPorNome(form.getCliente());
-		List<Animal> animais   = this.animalDAO.buscarPorNome(form.getAnimal()); 
-		
-		
+		List<Cliente> clientes = null;
+		List<Animal> animais = null;
+
+		if (form.getCliente() != null) {
+			clientes = this.clienteDAO.buscarPorNome(form.getCliente());
+		}
+
+		if (form.getCliente() != null) {
+			animais = this.animalDAO.buscarPorNome(form.getAnimal(), form.getCliente());
+		}
 		
 		if (clientes == null || clientes.isEmpty()) {
 			errors.rejectValue("cliente", "required.cliente", "Selecione um cliente valido");
